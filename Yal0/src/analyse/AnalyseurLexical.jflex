@@ -1,7 +1,7 @@
 package yal.analyse ;
 
 import java_cup.runtime.*;
-import yal.exceptions.AnalyseLexicaleException;
+import exceptions.AnalyseLexicaleException;
       
 %%
    
@@ -35,6 +35,7 @@ idf = [A-Za-z_][A-Za-z_0-9]*
 
 csteE = [0-9]+
 guillemet = [\"]
+commentaire = [/][/].*
 
 finDeLigne = \r|\n
 espace = {finDeLigne}  | [ \t\f]
@@ -48,6 +49,8 @@ espace = {finDeLigne}  | [ \t\f]
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
+
+{commentaire}          { }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
 

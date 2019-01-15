@@ -1,10 +1,10 @@
 package yal.analyse ;
 
 import java.util.*;
-import yal.arbre.* ;
-import yal.arbre.expressions.* ;
-import yal.arbre.instructions.* ;
-import yal.exceptions.AnalyseSyntaxiqueException;
+import arbre.* ;
+import arbre.expressions.* ;
+import arbre.instructions.* ;
+import exceptions.AnalyseSyntaxiqueException;
 
 import java_cup.runtime.*;
 
