@@ -1,0 +1,5 @@
+*.mips
+META-INF/
+Yal0.iml
+.idea/
+out/
