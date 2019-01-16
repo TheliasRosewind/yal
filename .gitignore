@@ -1,5 +1,5 @@
 *.mips
 META-INF/
-Yal0.iml
+*.iml
 .idea/
 out/

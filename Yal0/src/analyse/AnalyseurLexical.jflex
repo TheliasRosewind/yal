@@ -1,4 +1,4 @@
-package yal.analyse ;
+package analyse ;
 
 import java_cup.runtime.*;
 import exceptions.AnalyseLexicaleException;
