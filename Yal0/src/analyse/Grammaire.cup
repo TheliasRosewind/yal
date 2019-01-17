@@ -70,17 +70,13 @@ start with PROG ;
 
 PROG    ::=     PROGRAMME  IDF  DEBUT  LINST:li  FIN
                 {: RESULT = li ; :}
-                ;
-/*
-DECL    ::=     DECL_VAR:d
-                {: RESULT = d; :}
-                ;
-
-DECL_VAR::=     ENTIER IDF POINTVIRGULE
-                {:
+                |
+                PROGRAMME IDF DEBUT FIN
+                {: BlocDInstructions b = new BlocDInstructions(1);
+                   RESULT=b;
                 :}
                 ;
-*/
+
 LINST   ::=     LINST:li  INST:i
                 {: ((BlocDInstructions)li).ajouter(i) ;
                    RESULT = li ; :}
