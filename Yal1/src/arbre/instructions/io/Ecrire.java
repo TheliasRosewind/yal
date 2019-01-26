@@ -1,7 +1,8 @@
-package arbre.instructions;
+package arbre.instructions.io;
 
 
 import arbre.expressions.Expression;
+import arbre.instructions.Instruction;
 
 public class Ecrire extends Instruction {
 
@@ -14,6 +15,7 @@ public class Ecrire extends Instruction {
 
     @Override
     public void verifier() {
+        exp.verifier();
     }
 
     @Override

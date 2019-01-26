@@ -3,7 +3,11 @@ package analyse;
 import java.util.*;
 import arbre.* ;
 import arbre.expressions.* ;
+import arbre.expressions.binaires.* ;
+import arbre.expressions.binaires.logiques.* ;
+import arbre.expressions.binaires.arithmetiques.* ;
 import arbre.instructions.* ;
+import arbre.instructions.io.*;
 import exceptions.AnalyseSyntaxiqueException;
 
 import java_cup.runtime.*;

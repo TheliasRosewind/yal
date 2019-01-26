@@ -1,8 +1,8 @@
-package aRefractor;
+package arbre.instructions;
 
-import aRefractor.exceptions.NonConcordanceTypeException;
+import arbre.expressions.Idf;
+import exceptions.NonConcordanceTypeException;
 import arbre.expressions.Expression;
-import arbre.instructions.Instruction;
 
 public class Affectation extends Instruction {
 
@@ -10,12 +10,18 @@ public class Affectation extends Instruction {
 
 	private Expression exp;
 
+	public Affectation(Idf idf, Expression exp, int n){
+		super(n);
+		this.idf=idf;
+		this.exp=exp;
+	}
+
 	@Override
 	public void verifier() {
 		idf.verifier();
 		exp.verifier();
 		if (!idf.getType().concorde(exp.getType())){
-			throw new NonConcordanceTypeException();
+			throw new NonConcordanceTypeException(noLigne,idf.getNom());
 		}
 	}
 

@@ -1,4 +1,6 @@
-package aRefractor;
+package tds.symboles;
+
+import tds.symboles.Symbole;
 
 public class SymboleVariable extends Symbole {
 

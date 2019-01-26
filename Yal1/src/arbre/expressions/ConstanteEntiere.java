@@ -1,5 +1,8 @@
 package arbre.expressions;
 
+import tds.types.Type;
+import tds.types.TypesVariable;
+
 public class ConstanteEntiere extends Constante {
     
     public ConstanteEntiere(String texte, int n) {
@@ -15,4 +18,8 @@ public class ConstanteEntiere extends Constante {
         return sb.toString() ;
     }
 
+    @Override
+    public Type getType() {
+        return new Type(TypesVariable.ENTIER);
+    }
 }

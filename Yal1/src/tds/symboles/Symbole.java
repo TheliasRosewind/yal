@@ -1,4 +1,4 @@
-package aRefractor;
+package tds.symboles;
 
 public abstract class Symbole {
 
