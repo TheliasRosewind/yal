@@ -11,7 +11,7 @@ public class Declaration extends Instruction {
 
     public Declaration(String t, String i, int n){
         super(n);
-        this.type = new Type(TypesVariable.valueOf(t));
+        this.type = new Type(TypesVariable.valueOf(t.toUpperCase()));
         this.idf = new Idf(i, n);
     }
 

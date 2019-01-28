@@ -9,6 +9,10 @@ import arbre.expressions.binaires.arithmetiques.* ;
 import arbre.instructions.* ;
 import arbre.instructions.io.*;
 import exceptions.AnalyseSyntaxiqueException;
+import tds.TDS;
+import tds.entrees.*;
+import tds.symboles.*;
+import tds.types.*;
 
 import java_cup.runtime.*;
 
@@ -85,19 +89,19 @@ LINST   ::=     LINST:li  INST:i
                 {: ((BlocDInstructions)li).ajouter(i) ;
                    RESULT = li ; :}
         |
-                INST:i POINTVIRGULE
+                INST:i
                 {: BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
                    b.ajouter(i) ;
                    RESULT = b ; :}
                 ;
 
-INST    ::=     ECR:e
+INST    ::=     ECR:e POINTVIRGULE
                 {: RESULT = e ; :}
                 |
-                AFF:i
+                AFF:i POINTVIRGULE
                 {: RESULT = i;:}
                 |
-                DECL:d
+                DECL:d POINTVIRGULE
                 {: RESULT = d; :}
                 ;
 
@@ -110,7 +114,11 @@ AFF     ::=     IDF:i EGAL EXP:e
                 ;
 
 DECL    ::=     TYPE:t IDF:i
-                {: RESULT = new Declaration(t, i, ileft + 1); :};
+                {:
+                int dep = TDS.getInstance().newDeplacement();
+                TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep));
+                RESULT = new Declaration(t, i, ileft + 1);
+                :};
 
 EXP     ::=     CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}

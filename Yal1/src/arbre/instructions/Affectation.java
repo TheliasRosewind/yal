@@ -20,9 +20,9 @@ public class Affectation extends Instruction {
 	public void verifier() {
 		idf.verifier();
 		exp.verifier();
-		if (!idf.getType().concorde(exp.getType())){
-			throw new NonConcordanceTypeException(noLigne,idf.getNom());
-		}
+		/*if (!idf.getType().concorde(exp.getType())){
+			throw new NonConcordanceTypeException(noLigne, idf.getNom());
+		}*/
 	}
 
 	@Override

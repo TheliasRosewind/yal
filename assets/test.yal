@@ -1,3 +1,11 @@
 programme test debut
 
+// commentaire
+
+entier x;
+
+ecrire 5;
+
+x = 1;
+
 fin

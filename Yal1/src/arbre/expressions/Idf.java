@@ -32,6 +32,7 @@ public class Idf extends Expression {
 	}
 
 	public Type getType(){
+		//return TDS.getInstance().identifier(new EntreeVariable(this.getNom(), this.getNoLigne()));
 		return null;
 	}
 }

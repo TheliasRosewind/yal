@@ -52,6 +52,8 @@ espace = {finDeLigne}  | [ \t\f]
 
 "="                    { return symbol(CodesLexicaux.EGAL);}
 
+"entier"               { return symbol(CodesLexicaux.TYPE, yytext());}
+
 {commentaire}          { }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
