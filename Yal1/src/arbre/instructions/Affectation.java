@@ -10,9 +10,9 @@ public class Affectation extends Instruction {
 
 	private Expression exp;
 
-	public Affectation(Idf idf, Expression exp, int n){
+	public Affectation(String idf, Expression exp, int n){
 		super(n);
-		this.idf=idf;
+		this.idf = new Idf(idf, n);
 		this.exp=exp;
 	}
 

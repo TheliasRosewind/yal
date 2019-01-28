@@ -61,11 +61,11 @@ parser code {:
 /* Terminals (tokens returned by the scanner).  */
 
 terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, EGAL ;
-terminal String    IDF, CSTENTIERE ;
+terminal String    IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF ;
+non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, DECL;
 non terminal Expression EXP ;
 
 /* ----------------------------Grammar Section-------------------- */
@@ -77,7 +77,7 @@ PROG    ::=     PROGRAMME  IDF  DEBUT  LINST:li  FIN
                 |
                 PROGRAMME IDF DEBUT FIN
                 {: BlocDInstructions b = new BlocDInstructions(1);
-                   RESULT=b;
+                   RESULT = b;
                 :}
                 ;
 
@@ -106,15 +106,15 @@ ECR     ::=     ECRIRE EXP:e
                 ;
 
 AFF     ::=     IDF:i EGAL EXP:e
-                {: RESULT = new Affectation(i,e,ileft+1); :}
+                {: RESULT = new Affectation(i, e, ileft + 1); :}
                 ;
 
 DECL    ::=     TYPE:t IDF:i
-                {: RESULT = new Declaration(t,i);:};
+                {: RESULT = new Declaration(t, i, ileft + 1); :};
 
 EXP     ::=     CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
                 |
                 IDF:i
-                {: RESULT = new Idf(i,ileft+1); :}
+                {: RESULT = new Idf(i, ileft + 1); :}
                 ;

@@ -2,16 +2,17 @@ package arbre.instructions;
 
 import arbre.expressions.Idf;
 import tds.types.Type;
+import tds.types.TypesVariable;
 
 public class Declaration extends Instruction {
 
     private Type type;
     private Idf idf;
 
-    public Declaration(Type t, Idf i, int n){
+    public Declaration(String t, String i, int n){
         super(n);
-        this.type=t;
-        this.idf=i;
+        this.type = new Type(TypesVariable.valueOf(t));
+        this.idf = new Idf(i, n);
     }
 
     @Override
