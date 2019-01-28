@@ -37,6 +37,16 @@ public class TDS {
 		return tds.get(e);
 	}
 
+	public int newDeplacement(){
+		int dep = sommetDePile;
+		sommetDePile-=4;
+		return dep;
+	}
+
+	public int getSommetDePile() {
+		return sommetDePile;
+	}
+
 	public int getTailleZoneVariable(Entree e, Symbole s) {
 		return 0;
 	}
