@@ -50,6 +50,8 @@ espace = {finDeLigne}  | [ \t\f]
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
+"="                    { return symbol(CodesLexicaux.EGAL);}
+
 {commentaire}          { }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }

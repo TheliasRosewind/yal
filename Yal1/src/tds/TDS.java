@@ -10,11 +10,13 @@ import java.util.HashMap;
 public class TDS {
 
 	private HashMap<Entree, Symbole> tds;
+	private int sommetDePile;
 
 	private static TDS instance = new TDS();
 
 	private TDS(){
 		this.tds=new HashMap<>();
+		this.sommetDePile=0;
 	}
 
 	public static TDS getInstance(){

@@ -4,6 +4,7 @@ import arbre.expressions.Expression;
 import tds.TDS;
 import tds.entrees.EntreeVariable;
 import tds.symboles.Symbole;
+import tds.symboles.SymboleVariable;
 import tds.types.Type;
 
 public class Idf extends Expression {
@@ -12,10 +13,9 @@ public class Idf extends Expression {
 
 	private int dep;
 
-	protected Idf(String nom, int dep, int n) {
+	protected Idf(String nom, int n) {
 		super(n);
 		this.nom=nom;
-		this.dep=dep;
 	}
 
 	@Override
