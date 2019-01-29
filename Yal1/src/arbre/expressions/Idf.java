@@ -18,7 +18,7 @@ public class Idf extends Expression {
 
 	@Override
 	public void verifier() {
-		Symbole s = TDS.getInstance().identifier(new EntreeVariable(nom,noLigne));
+		Symbole s = TDS.getInstance().identifier(new EntreeVariable(nom, noLigne));
 		dep = s.getDeplacement();
 	}
 
