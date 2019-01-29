@@ -15,8 +15,10 @@ x = y;
 ecrire x;
 ecrire y;
 
-lire x;
+entier z;
 
-ecrire x;
+lire z;
+
+ecrire z;
 
 fin

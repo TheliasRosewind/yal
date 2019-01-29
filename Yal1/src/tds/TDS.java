@@ -39,7 +39,7 @@ public class TDS {
 
 	public int newDeplacement(){
 		int dep = sommetDePile;
-		sommetDePile-=4;
+		sommetDePile -= 4;
 		return dep;
 	}
 

@@ -1,6 +1,7 @@
 package arbre.instructions;
 
 import arbre.expressions.Idf;
+import tds.TDS;
 import tds.types.Type;
 import tds.types.TypesVariable;
 

@@ -1,5 +1,7 @@
 package arbre;
 
+import tds.TDS;
+
 import java.util.ArrayList;
 
 /**
@@ -49,6 +51,9 @@ public class BlocDInstructions extends ArbreAbstrait {
 		StringBuilder sb = new StringBuilder("") ;
 		sb.append(zoneData) ;
 		sb.append(debutCode) ;
+		sb.append("    add $sp, $sp, ");
+		sb.append(TDS.getInstance().getSommetDePile());
+		sb.append("   # réserver la place pour les variables\n");
 		for (ArbreAbstrait a : programme) {
 			sb.append(a.toMIPS()) ;
 		}
