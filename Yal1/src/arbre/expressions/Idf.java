@@ -24,7 +24,11 @@ public class Idf extends Expression {
 
 	@Override
 	public String toMIPS() {
-		return null;
+		StringBuilder sb = new StringBuilder("") ;
+		sb.append("    sw $v0, ") ;
+		sb.append(dep) ;
+		sb.append("($s7)\n") ;
+		return sb.toString() ;
 	}
 
 	public String getNom() {
