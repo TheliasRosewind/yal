@@ -29,6 +29,6 @@ public class Affectation extends Instruction {
 	public String toMIPS() {
 		return  "                   # affectation de la variable\n" +
 				exp.toMIPS() +
-				idf.toMIPS();
+		"    sw $v0, "+idf.getDeplacement()+"($s7)\n";
 	}
 }

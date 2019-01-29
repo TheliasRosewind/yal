@@ -3,9 +3,14 @@ programme test debut
 // commentaire
 
 entier x;
+entier y;
 
 ecrire 5;
 
 x = 1;
+y=78;
+
+ecrire x;
+ecrire y;
 
 fin

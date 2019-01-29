@@ -17,7 +17,8 @@ public class BlocDInstructions extends ArbreAbstrait {
 											"               .align 2\n" ;
 
 	protected static String debutCode = ".text\n" +
-										"main :\n" ;
+										"main :\n" +
+										"move $s7,$sp";
 	protected static String finCode = "end :\n" +
 									  "    li $v0, 10     # retour au système\n" +
 									  "    syscall\n" ;
