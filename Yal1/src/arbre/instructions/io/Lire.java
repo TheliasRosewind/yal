@@ -7,9 +7,9 @@ public class Lire extends Instruction {
 
     protected Idf idf ;
 
-    public Lire(Idf i, int n) {
+    public Lire(String i, int n) {
         super(n) ;
-        idf = i ;
+        idf = new Idf(i,n) ;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class Lire extends Instruction {
     public String toMIPS() {
         return  "                   # lecture au clavier\n" +
                 "    li $v0 , 5\n" +
-                "    syscall" +
+                "    syscall\n" +
                 "    sw $v0, " + idf.getDeplacement() + "($s7)\n" ;
     }
 
