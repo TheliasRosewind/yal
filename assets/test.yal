@@ -2,13 +2,14 @@ programme test debut
 
 // commentaire
 
-entier x;
-entier y;
+entier x ;
+entier y ;
 
 ecrire 5;
 
 x = 1;
-y = 78;
+y = 78
+;
 
 x = y;
 
