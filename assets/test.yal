@@ -15,4 +15,8 @@ x = y;
 ecrire x;
 ecrire y;
 
+lire x;
+
+ecrire x;
+
 fin

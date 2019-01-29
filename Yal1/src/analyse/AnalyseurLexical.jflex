@@ -54,6 +54,8 @@ espace = {finDeLigne}  | [ \t\f]
 
 "entier"               { return symbol(CodesLexicaux.TYPE, yytext());}
 
+"lire"                 { return symbol(CodesLexicaux.LIRE);}
+
 {commentaire}          { }
 
 {csteE}      	       { return symbol(CodesLexicaux.CSTENTIERE, yytext()); }
