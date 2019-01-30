@@ -69,21 +69,21 @@ terminal String    IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECL, LIR;
+non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, LIR;
 non terminal Expression EXP ;
 
 /* ----------------------------Grammar Section-------------------- */
  
 start with PROG ;
 
-PROG    ::=     PROGRAMME  IDF  DEBUT LDECL:ld FIN
-                {: RESULT = ld ; :}
+PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
+                {: RESULT = li ; :}
                 |
-                PROGRAMME  IDF  DEBUT LINST:li FIN
+                PROGRAMME IDF DEBUT LINST:li FIN
                 {: RESULT = li ; :}
                 ;
 
-LINST   ::=     LINST:li  INST:i
+LINST   ::=     LINST:li INST:i
                 {: ((BlocDInstructions)li).ajouter(i) ;
                    RESULT = li ; :}
                 |
@@ -99,9 +99,6 @@ INST    ::=     ECR:e POINTVIRGULE
                 AFF:i POINTVIRGULE
                 {: RESULT = i ;:}
                 |
-                DECL:d POINTVIRGULE
-                {: RESULT = d ; :}
-                |
                 LIR:l POINTVIRGULE
                 {: RESULT = l ; :}
                 ;
@@ -114,24 +111,24 @@ AFF     ::=     IDF:i EGAL EXP:e
                 {: RESULT = new Affectation(i, e, ileft + 1) ; :}
                 ;
 
-LDECL   ::=     LDECL:ld  DECL:d
+LDECL   ::=     LDECL:ld DECLVAR:d
                 {: ((BlocDInstructions)ld).ajouter(d) ;
                   RESULT = ld ; :}
                 |
-                DECL:d
+                DECLVAR:d
                 {: BlocDInstructions b = new BlocDInstructions(dleft + 1) ;
                    b.ajouter(d) ;
                    RESULT = b ; :}
                 ;
 
-DECL    ::=     TYPE:t IDF:i
+DECLVAR::=     TYPE:t IDF:i POINTVIRGULE
                 {: int dep = TDS.getInstance().newDeplacement() ;
-                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep)) ;
+                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep, t)) ;
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 ;
 
 LIR     ::=     LIRE IDF:i
-                {: RESULT = new Lire(i,ileft+1) ; :}
+                {: RESULT = new Lire(i, ileft+1) ; :}
                 ;
 
 EXP     ::=     CSTENTIERE:c

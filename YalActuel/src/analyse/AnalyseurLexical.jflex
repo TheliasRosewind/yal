@@ -63,5 +63,6 @@ espace = {finDeLigne}  | [ \t\f]
 {idf}      	           { return symbol(CodesLexicaux.IDF, yytext()); }
 
 {espace}               { }
+
 .                      { throw new AnalyseLexicaleException(yyline, yycolumn, yytext()) ; }
 

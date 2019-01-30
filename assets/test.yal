@@ -2,24 +2,18 @@ programme test debut
 
 // commentaire
 
-entier x ;
-entier y ;
+entier x;
+
+entier y;
 
 ecrire 5;
 
-x = 1;
-y = 78
-;
+x = 10;
 
-x = y;
+y = x;
 
-ecrire x;
+lire x;
+
 ecrire y;
-
-entier z;
-
-lire z;
-
-ecrire z;
 
 fin

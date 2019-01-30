@@ -20,9 +20,9 @@ public class BlocDInstructions extends ArbreAbstrait {
 
 	protected static String debutCode = ".text\n" +
 										"main :\n" +
-										"    move $s7,$sp   # initialiser $s7 avec $sp\n";
+										"    move $s7,$sp                # initialiser $s7 avec $sp\n";
 	protected static String finCode = "end :\n" +
-									  "    li $v0, 10     # retour au système\n" +
+									  "    li $v0, 10                  # retour au système\n" +
 									  "    syscall\n" ;
 
 	public BlocDInstructions(int n) {
@@ -53,7 +53,7 @@ public class BlocDInstructions extends ArbreAbstrait {
 		sb.append(debutCode) ;
 		sb.append("    add $sp, $sp, ");
 		sb.append(TDS.getInstance().getSommetDePile());
-		sb.append("   # réserver la place pour les variables\n");
+		sb.append("            # réserver la place pour les variables\n");
 		for (ArbreAbstrait a : programme) {
 			sb.append(a.toMIPS()) ;
 		}

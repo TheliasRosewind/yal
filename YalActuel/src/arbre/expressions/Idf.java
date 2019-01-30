@@ -11,6 +11,8 @@ public class Idf extends Expression {
 
 	private int dep;
 
+	private Type type;
+
 	public Idf(String nom, int n) {
 		super(n);
 		this.nom = nom;
@@ -20,6 +22,7 @@ public class Idf extends Expression {
 	public void verifier() {
 		Symbole s = TDS.getInstance().identifier(new EntreeVariable(nom, noLigne));
 		dep = s.getDeplacement();
+		type = s.getType();
 	}
 
 	@Override
@@ -36,8 +39,7 @@ public class Idf extends Expression {
 	}
 
 	public Type getType(){
-		//return TDS.getInstance().identifier(new EntreeVariable(this.getNom(), this.getNoLigne()));
-		return null;
+		return type;
 	}
 
 	public int getDeplacement() {
