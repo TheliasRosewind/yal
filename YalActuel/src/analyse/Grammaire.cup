@@ -112,13 +112,8 @@ AFF     ::=     IDF:i EGAL EXP:e
                 ;
 
 LDECL   ::=     LDECL:ld DECLVAR:d
-                {: ((BlocDInstructions)ld).ajouter(d) ;
-                  RESULT = ld ; :}
                 |
                 DECLVAR:d
-                {: BlocDInstructions b = new BlocDInstructions(dleft + 1) ;
-                   b.ajouter(d) ;
-                   RESULT = b ; :}
                 ;
 
 DECLVAR::=     TYPE:t IDF:i POINTVIRGULE
