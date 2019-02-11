@@ -11,8 +11,8 @@ public abstract class ExpressionBinaire extends Expression {
 
 	public ExpressionBinaire(Expression g, Expression d, int n){
 		super(n);
-		droite=d;
-		gauche=g;
+		droite = d;
+		gauche = g;
 	}
 
 	@Override
@@ -20,13 +20,4 @@ public abstract class ExpressionBinaire extends Expression {
 		return gauche.getType();
 	}
 
-	@Override
-	public void verifier() {
-
-	}
-
-	@Override
-	public String toMIPS() {
-		return null;
-	}
 }

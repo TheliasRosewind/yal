@@ -8,4 +8,13 @@ public class Soustraction extends ExpressionArithmetique {
         super(g,d,n);
     }
 
+    @Override
+    public void verifier() {
+
+    }
+
+    @Override
+    public String toMIPS() {
+        return null;
+    }
 }

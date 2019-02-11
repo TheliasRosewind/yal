@@ -1,7 +1,6 @@
-package arbre.expressions.binaires.arithmetiques;
+package arbre.expressions.binaires.logiques;
 
 import arbre.expressions.Expression;
-import arbre.expressions.binaires.logiques.ExpressionLogique;
 
 public class Egal extends ExpressionLogique {
 

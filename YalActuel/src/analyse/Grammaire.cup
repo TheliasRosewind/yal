@@ -129,17 +129,17 @@ LIR     ::=     LIRE IDF:i
                 {: RESULT = new Lire(i, ileft+1) ; :}
                 ;
 
-EXP     ::=     EXP:l PLUS EXP:d
-                {: RESULT = new Addition(l, d, ileft+1) ; :}
+EXP     ::=     EXP:g PLUS EXP:d
+                {: RESULT = new Addition(g, d, ileft+1) ; :}
                 |
-                EXP:l MOINS EXP:d
-                {: RESULT = new Soustraction(l, d, ileft+1) ; :}
+                EXP:g MOINS EXP:d
+                {: RESULT = new Soustraction(g, d, ileft+1) ; :}
                 |
-                EXP:l MULT EXP:d
-                {: RESULT = new Multiplication(l, d, ileft+1) ; :}
+                EXP:g MULT EXP:d
+                {: RESULT = new Multiplication(g, d, ileft+1) ; :}
                 |
-                EXP:l DIV EXP:d
-                {: RESULT = new Division(l, d, ileft+1) ; :}
+                EXP:g DIV EXP:d
+                {: RESULT = new Division(g, d, ileft+1) ; :}
                 |
                 CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
