@@ -51,6 +51,10 @@ espace = {finDeLigne}  | [ \t\f]
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
 "="                    { return symbol(CodesLexicaux.EGAL);}
+"+"                    { return symbol(CodesLexicaux.PLUS);}
+"-"                    { return symbol(CodesLexicaux.MOINS);}
+"*"                    { return symbol(CodesLexicaux.MULT);}
+"/"                    { return symbol(CodesLexicaux.DIV);}
 
 "entier"               { return symbol(CodesLexicaux.TYPE, yytext());}
 

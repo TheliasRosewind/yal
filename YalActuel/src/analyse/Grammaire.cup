@@ -64,13 +64,16 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol    PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, EGAL, LIRE ;
-terminal String    IDF, CSTENTIERE, TYPE ;
+terminal Symbol PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV ;
+terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
 
 non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, LIR;
 non terminal Expression EXP ;
+
+precedence left PLUS, MOINS;
+precedence left MULT, DIV;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -121,7 +124,7 @@ LDECL   ::=     LDECL:ld DECLVAR:d
                    RESULT = b ; :}
                 ;
 
-DECLVAR::=     TYPE:t IDF:i POINTVIRGULE
+DECLVAR ::=     TYPE:t IDF:i POINTVIRGULE
                 {: int dep = TDS.getInstance().newDeplacement() ;
                    TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep, t)) ;
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
@@ -131,7 +134,19 @@ LIR     ::=     LIRE IDF:i
                 {: RESULT = new Lire(i, ileft+1) ; :}
                 ;
 
-EXP     ::=     CSTENTIERE:c
+EXP     ::=     EXP:l PLUS EXP:d
+                {: RESULT = new Addition(l, d, ileft+1) ; :}
+                |
+                EXP:l MOINS EXP:d
+                {: RESULT = new Soustraction(l, d, ileft+1) ; :}
+                |
+                EXP:l MULT EXP:d
+                {: RESULT = new Multiplication(l, d, ileft+1) ; :}
+                |
+                EXP:l DIV EXP:d
+                {: RESULT = new Division(l, d, ileft+1) ; :}
+                |
+                CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
                 |
                 IDF:i
