@@ -130,16 +130,16 @@ LIR     ::=     LIRE IDF:i
                 ;
 
 EXP     ::=     EXP:g PLUS EXP:d
-                {: RESULT = new Addition(g, d, ileft+1) ; :}
+                {: RESULT = new Addition(g, d, gleft+1) ; :}
                 |
                 EXP:g MOINS EXP:d
-                {: RESULT = new Soustraction(g, d, ileft+1) ; :}
+                {: RESULT = new Soustraction(g, d, gleft+1) ; :}
                 |
                 EXP:g MULT EXP:d
-                {: RESULT = new Multiplication(g, d, ileft+1) ; :}
+                {: RESULT = new Multiplication(g, d, gleft+1) ; :}
                 |
                 EXP:g DIV EXP:d
-                {: RESULT = new Division(g, d, ileft+1) ; :}
+                {: RESULT = new Division(g, d, gleft+1) ; :}
                 |
                 CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}

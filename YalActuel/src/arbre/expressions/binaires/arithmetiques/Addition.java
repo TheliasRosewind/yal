@@ -9,12 +9,14 @@ public class Addition extends ExpressionArithmetique {
     }
 
     @Override
-    public void verifier() {
-
-    }
-
-    @Override
     public String toMIPS() {
-        return null;
+        String s=super.toMIPS();
+        StringBuilder sb=new StringBuilder();
+        sb.append("    # Début de l'addition\n" +
+                s +
+                "     # Execution de l'addition\n" +
+                "     add $v0, $t8, $v0\n" +
+                "     #Fin de l'addition\n");
+        return sb.toString();
     }
 }

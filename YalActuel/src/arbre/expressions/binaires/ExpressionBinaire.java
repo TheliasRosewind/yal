@@ -5,9 +5,9 @@ import arbre.expressions.Expression;
 
 public abstract class ExpressionBinaire extends Expression {
 
-	private Expression droite;
+	protected Expression droite;
 
-	private Expression gauche;
+	protected Expression gauche;
 
 	public ExpressionBinaire(Expression g, Expression d, int n){
 		super(n);
