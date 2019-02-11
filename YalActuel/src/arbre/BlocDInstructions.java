@@ -12,36 +12,25 @@ import java.util.ArrayList;
 
 public class BlocDInstructions extends ArbreAbstrait {
 
-	protected ArrayList<ArbreAbstrait> programme ;
-
-	protected static String zoneData = ".data\n" +
-											"finLigne:      .asciiz \"\\n\"\n" +
-											"               .align 2\n" ;
-
-	protected static String debutCode = ".text\n" +
-										"main :\n" +
-										"    move $s7,$sp                # initialiser $s7 avec $sp\n";
-	protected static String finCode = "end :\n" +
-									  "    li $v0, 10                  # retour au système\n" +
-									  "    syscall\n" ;
+	protected ArrayList<ArbreAbstrait> instructions ;
 
 	public BlocDInstructions(int n) {
 		super(n) ;
-		programme = new ArrayList<>() ;
+		instructions = new ArrayList<>() ;
 	}
 
 	public void ajouter(ArbreAbstrait a) {
-		programme.add(a) ;
+		instructions.add(a) ;
 	}
 
 	@Override
 	public String toString() {
-		return programme.toString() ;
+		return instructions.toString() ;
 	}
 
 	@Override
 	public void verifier() {
-		for (ArbreAbstrait a : programme) {
+		for (ArbreAbstrait a : instructions) {
 			a.verifier() ;
 		}
 	}
@@ -49,15 +38,9 @@ public class BlocDInstructions extends ArbreAbstrait {
 	@Override
 	public String toMIPS() {
 		StringBuilder sb = new StringBuilder("") ;
-		sb.append(zoneData) ;
-		sb.append(debutCode) ;
-		sb.append("    add $sp, $sp, ");
-		sb.append(TDS.getInstance().getSommetDePile());
-		sb.append("            # réserver la place pour les variables\n");
-		for (ArbreAbstrait a : programme) {
+		for (ArbreAbstrait a : instructions) {
 			sb.append(a.toMIPS()) ;
 		}
-		sb.append(finCode) ;
 		return sb.toString() ;
 	}
 

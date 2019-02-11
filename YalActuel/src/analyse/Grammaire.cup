@@ -7,6 +7,7 @@ import arbre.expressions.binaires.* ;
 import arbre.expressions.binaires.logiques.* ;
 import arbre.expressions.binaires.arithmetiques.* ;
 import arbre.instructions.* ;
+import arbre.instructions.conditionnelles.* ;
 import arbre.instructions.io.*;
 import exceptions.AnalyseSyntaxiqueException;
 import tds.TDS;
@@ -64,7 +65,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, TANTQUE, REPETER, FINTANTQUE ;
+terminal Symbol PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE ;
 terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
@@ -72,6 +73,7 @@ terminal String IDF, CSTENTIERE, TYPE ;
 non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, LIR;
 non terminal Expression EXP ;
 
+precedence left EGALEGAL;
 precedence left PLUS, MOINS;
 precedence left MULT, DIV;
 
@@ -80,10 +82,14 @@ precedence left MULT, DIV;
 start with PROG ;
 
 PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
-                {: RESULT = li ; :}
+                {: Programme p = new Programme();
+                p.ajouter(li);
+                RESULT = p ; :}
                 |
                 PROGRAMME IDF DEBUT LINST:li FIN
-                {: RESULT = li ; :}
+                {: Programme p = new Programme();
+               p.ajouter(li);
+               RESULT = p; :}
                 ;
 
 LDECL   ::=     LDECL:ld DECLVAR:d
@@ -115,6 +121,9 @@ INST    ::=     ECR:e POINTVIRGULE
                 |
                 LIR:l POINTVIRGULE
                 {: RESULT = l ; :}
+                |
+                SI EXP:e ALORS LINST:li FINSI
+                {: RESULT = new SiAlors(e, li, eleft+1); :}
                 ;
 
 BOUCLE  ::=     TANTQUE EXP:e REPETER LINST:li FINTANTQUE
@@ -143,6 +152,9 @@ EXP     ::=     EXP:g PLUS EXP:d
                 |
                 EXP:g DIV EXP:d
                 {: RESULT = new Division(g, d, gleft+1) ; :}
+                |
+                EXP:g EGALEGAL EXP:d
+                {: RESULT = new EgalLogique(g, d, gleft+1) ; :}
                 |
                 CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}

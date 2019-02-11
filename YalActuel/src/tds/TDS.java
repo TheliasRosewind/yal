@@ -4,6 +4,7 @@ import tds.entrees.Entree;
 import tds.symboles.Symbole;
 import exceptions.DoubleDeclarationException;
 import exceptions.VariableNonDeclareeException;
+import tds.types.TypesCompteurs;
 
 import java.util.HashMap;
 
@@ -11,12 +12,16 @@ public class TDS {
 
 	private HashMap<Entree, Symbole> tds;
 	private int sommetDePile;
+	private HashMap<TypesCompteurs, Integer> compteurs;
 
 	private static TDS instance = new TDS();
 
 	private TDS(){
 		this.tds=new HashMap<>();
 		this.sommetDePile=0;
+		this.compteurs=new HashMap<>();
+		compteurs.put(TypesCompteurs.CONDITIONNELLES,0);
+		compteurs.put(TypesCompteurs.BLOCS,0);
 	}
 
 	public static TDS getInstance(){
@@ -45,6 +50,12 @@ public class TDS {
 
 	public int getSommetDePile() {
 		return sommetDePile;
+	}
+
+	public int nextCompteur(TypesCompteurs compteur){
+		int i=compteurs.get(compteur);
+		compteurs.replace(compteur,i+1);
+		return i;
 	}
 
 	public int getTailleZoneVariable(Entree e, Symbole s) {
