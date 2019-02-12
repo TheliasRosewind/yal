@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+rm assets/*.mips
+
 cd YalActuel/src/analyse/
 
 java -jar /opt/depot/projetToucan/java-cup-11a.jar -parser AnalyseurSyntaxique -symbols CodesLexicaux Grammaire.cup
@@ -10,4 +12,6 @@ cd ../../..
 
 ant -buildfile yal.xml
 
-java -cp out/production/YalActuel/:/opt/depot/projetToucan/java-cup-11a.jar:/opt/depot/projetToucan/jflex-1.6.1.jar Yal assets/test2.yal
+for filename in assets/*.yal; do
+    java -cp out/production/YalActuel/:/opt/depot/projetToucan/java-cup-11a.jar:/opt/depot/projetToucan/jflex-1.6.1.jar Yal "$filename"
+done
