@@ -9,6 +9,7 @@ import arbre.expressions.binaires.arithmetiques.* ;
 import arbre.instructions.* ;
 import arbre.instructions.conditionnelles.* ;
 import arbre.instructions.io.*;
+import arbre.instructions.boucle.* ;
 import exceptions.AnalyseSyntaxiqueException;
 import tds.TDS;
 import tds.entrees.*;

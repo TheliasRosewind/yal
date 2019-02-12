@@ -18,13 +18,13 @@ public class EgalLogique extends ExpressionLogique {
         sb.append("     # Début égal\n" +
                 s +
                 "   # Exécution égal\n" +
-                "   bne $v0, $t8, cond\n" + i +
+                "   bne $v0, $t8, cond" + i + "\n" +
                 "   li $v0, 1\n" +
-                "   j fcond\n" + i +
+                "   j fcond" + i + "\n" +
                 "   cond" + i + ":\n"+
                 "   li $v0, 0\n" +
                 "   fcond" + i + ":\n" +
-                "   #Fin égal");
+                "   #Fin égal\n");
         return sb.toString();
     }
 }

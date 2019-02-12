@@ -4,7 +4,9 @@ import arbre.ArbreAbstrait;
 import arbre.expressions.Expression;
 import arbre.instructions.Instruction;
 import exceptions.NonConcordanceTypeException;
+import tds.TDS;
 import tds.types.Type;
+import tds.types.TypesCompteurs;
 import tds.types.TypesVariable;
 
 public class SiAlors extends Instruction {
@@ -29,6 +31,14 @@ public class SiAlors extends Instruction {
 
     @Override
     public String toMIPS() {
-        return null;
+        int cond= TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
+        StringBuilder sb=new StringBuilder();
+        sb.append("     #Début Si Alors" +
+                "   si" + cond + ":\n" +
+                e.toMIPS() +
+                "   beq $v0 , $zero ,fsi" + cond + "\n" +
+                si.toMIPS() +
+                "   fsi"+cond+":\n");
+        return sb.toString();
     }
 }
