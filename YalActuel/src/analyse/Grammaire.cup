@@ -74,7 +74,8 @@ terminal String IDF, CSTENTIERE, TYPE ;
 non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, LIR;
 non terminal Expression EXP ;
 
-precedence left EGALEGAL;
+precedence left EGALEGAL, DIFF;
+precedence left INF, SUPP;
 precedence left PLUS, MOINS;
 precedence left MULT, DIV;
 
@@ -156,6 +157,15 @@ EXP     ::=     EXP:g PLUS EXP:d
                 |
                 EXP:g EGALEGAL EXP:d
                 {: RESULT = new EgalLogique(g, d, gleft+1) ; :}
+                |
+                EXP:g INF EXP:d
+                {: RESULT = new Inferieur(g, d, gleft+1) ; :}
+                |
+                EXP:g SUPP EXP:d
+                {: RESULT = new Superieur(g, d, gleft+1) ; :}
+                |
+                EXP:g DIFF EXP:d
+                {: RESULT = new Inferieur(g, d, gleft+1) ; :}
                 |
                 CSTENTIERE:c
                 {: RESULT = new ConstanteEntiere(c, cleft + 1) ; :}
