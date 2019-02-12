@@ -16,8 +16,8 @@ public class SiAlors extends Instruction {
 
     public SiAlors(Expression e, ArbreAbstrait si, int noLigne){
         super(noLigne);
-        this.si=si;
-        this.e=e;
+        this.si = si;
+        this.e = e;
     }
 
     @Override
@@ -32,13 +32,11 @@ public class SiAlors extends Instruction {
     @Override
     public String toMIPS() {
         int cond= TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        StringBuilder sb=new StringBuilder();
-        sb.append("     #Début Si Alors" +
-                "   si" + cond + ":\n" +
+        return  "     #Début Si Alors" +
+                "     si" + cond + ":\n" +
                 e.toMIPS() +
-                "   beq $v0 , $zero ,fsi" + cond + "\n" +
+                "     beq $v0 , $zero ,fsi" + cond + "\n" +
                 si.toMIPS() +
-                "   fsi"+cond+":\n");
-        return sb.toString();
+                "     fsi" + cond + ":\n";
     }
 }

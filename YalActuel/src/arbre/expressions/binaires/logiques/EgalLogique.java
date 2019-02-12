@@ -13,18 +13,16 @@ public class EgalLogique extends ExpressionLogique {
     @Override
     public String toMIPS() {
         String s = super.toMIPS();
-        StringBuilder sb=new StringBuilder();
-        int i=TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        sb.append("     # Début égal\n" +
+        int i = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
+        return "     # Début égal\n" +
                 s +
-                "   # Exécution égal\n" +
-                "   bne $v0, $t8, cond" + i + "\n" +
-                "   li $v0, 1\n" +
-                "   j fcond" + i + "\n" +
-                "   cond" + i + ":\n"+
-                "   li $v0, 0\n" +
-                "   fcond" + i + ":\n" +
-                "   #Fin égal\n");
-        return sb.toString();
+                "     # Exécution égal\n" +
+                "     bne $v0, $t8, cond" + i + "\n" +
+                "     li $v0, 1\n" +
+                "     j fcond" + i + "\n" +
+                "     cond" + i + ":\n" +
+                "     li $v0, 0\n" +
+                "     fcond" + i + ":\n" +
+                "     #Fin égal\n";
     }
 }

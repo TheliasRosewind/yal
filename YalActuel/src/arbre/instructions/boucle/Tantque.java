@@ -12,10 +12,10 @@ public class Tantque extends Instruction {
 	protected Expression e;
 	protected ArbreAbstrait tantque;
 
-	public Tantque(Expression e, ArbreAbstrait si, int noLigne){
+	public Tantque(Expression e, ArbreAbstrait tantque, int noLigne){
 		super(noLigne);
-		this.tantque=si;
-		this.e=e;
+		this.tantque = tantque;
+		this.e = e;
 	}
 
 	@Override

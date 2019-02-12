@@ -18,8 +18,8 @@ public class TDS {
 
 	private TDS(){
 		this.tds=new HashMap<>();
-		this.sommetDePile=0;
-		this.compteurs=new HashMap<>();
+		this.sommetDePile = 0;
+		this.compteurs = new HashMap<>();
 		compteurs.put(TypesCompteurs.CONDITIONNELLES,0);
 		compteurs.put(TypesCompteurs.BLOCS,0);
 	}

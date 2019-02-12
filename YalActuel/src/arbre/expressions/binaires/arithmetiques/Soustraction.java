@@ -10,13 +10,11 @@ public class Soustraction extends ExpressionArithmetique {
 
     @Override
     public String toMIPS() {
-        String s=super.toMIPS();
-        StringBuilder sb=new StringBuilder();
-        sb.append("    # Début de la soustraction\n" +
+        String s = super.toMIPS();
+        return "     # Début de la soustraction\n" +
                 s +
                 "     # Execution de la soustraction\n" +
                 "     sub $v0, $t8, $v0\n" +
-                "     #Fin de la soustraction\n");
-        return sb.toString();
+                "     #Fin de la soustraction\n";
     }
 }

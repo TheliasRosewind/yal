@@ -20,14 +20,14 @@ public class Ecrire extends Instruction {
 
     @Override
     public String toMIPS() {
-        return  "                                # affichage de l'expression\n" +
+        return  "     # affichage de l'expression\n" +
                 exp.toMIPS() +
-                "    move $a0, $v0\n" +
-                "    li $v0, 1\n" +
-                "    syscall\n" +
-                "    li $v0, 4                   # retour à la ligne\n" +
-                "    la $a0, finLigne\n" +
-                "    syscall\n" ;
+                "     move $a0, $v0\n" +
+                "     li $v0, 1\n" +
+                "     syscall\n" +
+                "     li $v0, 4                   # retour à la ligne\n" +
+                "     la $a0, finLigne\n" +
+                "     syscall\n" ;
     }
 
 }

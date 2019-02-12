@@ -1,7 +1,6 @@
 package arbre.instructions;
 
 import arbre.expressions.Idf;
-import tds.TDS;
 import tds.types.Type;
 import tds.types.TypesVariable;
 
@@ -17,9 +16,7 @@ public class Declaration extends Instruction {
     }
 
     @Override
-    public void verifier() {
-
-    }
+    public void verifier() {}
 
     @Override
     public String toMIPS() {

@@ -20,10 +20,10 @@ public class Programme extends ArbreAbstrait {
 
 	protected static String debutCode = ".text\n" +
 										"main :\n" +
-										"    move $s7,$sp                # initialiser $s7 avec $sp\n";
-	protected static String finCode = "end :\n" +
-									  "    li $v0, 10                  # retour au système\n" +
-									  "    syscall\n" ;
+										"     move $s7,$sp                # initialiser $s7 avec $sp\n";
+	protected static String finCode =   "end :\n" +
+									    "     li $v0, 10                  # retour au système\n" +
+									    "     syscall\n" ;
 
 	public Programme() {
 		super(1) ;

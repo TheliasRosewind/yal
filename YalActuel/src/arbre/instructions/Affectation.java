@@ -13,7 +13,7 @@ public class Affectation extends Instruction {
 	public Affectation(String idf, Expression exp, int n){
 		super(n);
 		this.idf = new Idf(idf, n);
-		this.exp=exp;
+		this.exp = exp;
 	}
 
 	@Override
@@ -27,8 +27,8 @@ public class Affectation extends Instruction {
 
 	@Override
 	public String toMIPS() {
-		return  "                                # affectation de la variable\n" +
+		return  "     # affectation de la variable\n" +
 				exp.toMIPS() +
-				"    sw $v0, " + idf.getDeplacement() + "($s7)\n";
+				"     sw $v0, " + idf.getDeplacement() + "($s7)\\n\"";
 	}
 }

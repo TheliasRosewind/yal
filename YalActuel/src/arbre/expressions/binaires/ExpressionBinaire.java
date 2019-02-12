@@ -28,18 +28,16 @@ public abstract class ExpressionBinaire extends Expression {
 
 	@Override
 	public String toMIPS() {
-		StringBuilder sb=new StringBuilder();
-		sb.append("     # Chargement de l'expression gauche dans $v0\n" +
+		return "     # Chargement de l'expression gauche dans $v0\n" +
 				gauche.toMIPS() +
-				"   # Empilage de l'expression de gauche\n" +
-				"   sw $v0, 0($sp)\n" +
-				"   addi $sp,$sp,-4\n" +
-				"   # Chargement de l'expression de droite dans $v0\n" +
+				"     # Empilage de l'expression de gauche\n" +
+				"     sw $v0, 0($sp)\n" +
+				"     addi $sp,$sp,-4\n" +
+				"     # Chargement de l'expression de droite dans $v0\n" +
 				droite.toMIPS() +
-				"   # Dépilage de l'expression de gauche dans $t8\n" +
-				"   lw $t8, 4($sp)\n" +
-				"   addi $sp, $sp, 4\n");
-		return sb.toString();
+				"     # Dépilage de l'expression de gauche dans $t8\n" +
+				"     lw $t8, 4($sp)\n" +
+				"     addi $sp, $sp, 4\n";
 	}
 
 }

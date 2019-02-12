@@ -9,7 +9,7 @@ public class Type {
 	}
 
 	public boolean concorde(Type t){
-		return this.type==t.type;
+		return this.type == t.type;
 	}
 
 }

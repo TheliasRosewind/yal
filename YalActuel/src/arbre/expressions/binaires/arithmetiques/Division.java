@@ -10,14 +10,12 @@ public class Division extends ExpressionArithmetique {
 
     @Override
     public String toMIPS() {
-        String s=super.toMIPS();
-        StringBuilder sb=new StringBuilder();
-        sb.append("    # Début de la division\n" +
+        String s = super.toMIPS();
+        return "     # Début de la division\n" +
                 s +
                 "     # Execution de la division\n" +
                 "     div $t8, $v0\n" +
                 "     mflo $v0\n" +
-                "     #Fin de la division\n");
-        return sb.toString();
+                "     #Fin de la division\n";
     }
 }
