@@ -64,3 +64,9 @@ Les anciennes versions du projet sont disponibles dans le dossier [Versions](Ver
 * **Thelias Rosewind** - *Développement*
 * **Cottens** - *Développement*
 * **Sechsyo** - *Développement*
+***
+## À faire ##
+- [x] README détaillé
+- [ ] Documentation du langage yal
+- [ ] Description des différentes versions
+- [ ] Ajout de plus de fichiers tests
