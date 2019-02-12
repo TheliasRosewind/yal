@@ -35,7 +35,7 @@ si y>x alors
 finsi
 
 lire y;
-tantque x < 10 repeter
+tantque non (x > 9) repeter
     x = x + 1;
     ecrire - x;
 fintantque

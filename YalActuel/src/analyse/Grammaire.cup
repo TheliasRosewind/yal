@@ -3,6 +3,7 @@ package analyse;
 import java.util.*;
 import arbre.* ;
 import arbre.expressions.* ;
+import arbre.expressions.unaires.* ;
 import arbre.expressions.binaires.* ;
 import arbre.expressions.binaires.logiques.* ;
 import arbre.expressions.binaires.arithmetiques.* ;
@@ -66,7 +67,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE ;
+terminal Symbol PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER ;
 terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
@@ -79,6 +80,8 @@ precedence left EGALEGAL, DIFF;
 precedence left INF, SUPP;
 precedence left PLUS, MOINS;
 precedence left MULT, DIV;
+precedence left NON;
+precedence left POUV;
 
 /* ----------------------------Grammar Section-------------------- */
  
@@ -172,7 +175,10 @@ EXP     ::=     EXP:g PLUS EXP:d
                 {: RESULT = new Different(g, d, gleft+1) ; :}
                 |
                 MOINS EXP:g
-                {: RESULT = new Opposition(g, gleft+1);:}
+                {: RESULT = new Negation(g, gleft+1);:}
+                |
+                NON EXP:g
+                {: RESULT = new NonLogique(g, gleft+1);:}
                 |
                 EXP:g ET EXP:d
                 {: RESULT = new EtLogique(g,d,gleft+1); :}
@@ -185,4 +191,7 @@ EXP     ::=     EXP:g PLUS EXP:d
                 |
                 IDF:i
                 {: RESULT = new Idf(i, ileft + 1) ; :}
+                |
+                POUV EXP:e PFER
+                {: RESULT = e; :}
                 ;
