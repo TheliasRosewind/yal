@@ -13,18 +13,16 @@ public class Different extends ExpressionLogique {
     @Override
     public String toMIPS() {
         String s = super.toMIPS();
-        StringBuilder sb=new StringBuilder();
         int i=TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        sb.append("     # Début différent\n" +
+        return ("     # Début différent\n" +
                 s +
-                "   # Exécution différent\n" +
-                "   beq $t8, $v0, cond" + i + "\n" +
-                "   li $v0, 1\n" +
-                "   j fcond" + i + "\n" +
-                "   cond" + i + ":\n"+
-                "   li $v0, 0\n" +
-                "   fcond" + i + ":\n" +
-                "   #Fin différent\n");
-        return sb.toString();
+                "     # Exécution différent\n" +
+                "     beq $t8, $v0, cond" + i + "\n" +
+                "     li $v0, 1\n" +
+                "     j fcond" + i + "\n" +
+                "     cond" + i + ":\n" +
+                "     li $v0, 0\n" +
+                "     fcond" + i + ":\n" +
+                "     #Fin différent\n");
     }
 }
