@@ -13,18 +13,30 @@ public class SiAlors extends Instruction {
 
     protected Expression e;
     protected ArbreAbstrait si;
+	protected ArbreAbstrait sinon;
     protected int identifiant;
+    private boolean aSinon;
 
     public SiAlors(Expression e, ArbreAbstrait si, int noLigne){
         super(noLigne);
         this.si = si;
         this.e = e;
+        this.aSinon = false;
+    }
+
+    public SiAlors(Expression e, ArbreAbstrait si, ArbreAbstrait sinon, int noLigne){
+    	super(noLigne);
+	    this.si = si;
+	    this.e = e;
+	    this.sinon = sinon;
+	    this.aSinon = true;
     }
 
     @Override
     public void verifier() {
         e.verifier();
         si.verifier();
+        if (this.aSinon) sinon.verifier();
         if(!e.getType().concorde(new Type(TypesVariable.BOOLEEN))){
             throw new NonConcordanceTypeException(noLigne, " condition nécessite un booléen");
         }
@@ -33,12 +45,19 @@ public class SiAlors extends Instruction {
 
     @Override
     public String toMIPS() {
-        return  "          #Début Si Alors\n" +
-                "     si" + identifiant + ":\n" +
-                e.toMIPS() +
-                "     beq $v0 , $zero ,fsi" + identifiant + "\n" +
-                si.toMIPS() +
-                "     fsi" + identifiant + ":\n" +
-                "\n";
+	    String condition = "          # Début Si Alors" + (aSinon ? " Sinon" : "") + "\n" +
+			    "     si" + identifiant + ":\n" +
+			    e.toMIPS() +
+			    "     beq $v0, $zero, " + (aSinon ? "sinon" : "fsi") + identifiant + "\n" +
+			    si.toMIPS();
+
+	    if (aSinon) {
+		    condition +=   "     b fsi" + identifiant + "\n" +
+				    "     sinon" + identifiant + ":\n" +
+				    sinon.toMIPS();
+	    }
+
+	    condition += "     fsi" + identifiant + ":\n\n";
+	    return condition;
     }
 }
