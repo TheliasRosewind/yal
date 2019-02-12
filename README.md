@@ -28,7 +28,6 @@ Une fois le projet cloné et ouvert, allez dans *File > Project Structure*.
 - **Ant Build**
     
     Vous n'avez qu'à utiliser la commande `./tests.sh` dans le dossier [`yal`](/).
-    
 - **Run et Artifact JAR**
 
     Vous devrez exécuter systématiquement les commandes suivantes dans le package [`analyse`](YalActuel/src/analyse/) (si vous n'avez que les fichiers [`AnalyseurLexical.jflex`](YalActuel/src/analyse/AnalyseurLexical.jflex) et [`Grammaire.cup`](YalActuel/src/analyse/Grammaire.cup) à l'intérieur et/ou que vous les avez modifiés) :
@@ -48,6 +47,7 @@ Une fois le projet cloné et ouvert, allez dans *File > Project Structure*.
         java -jar out/artifacts/yal_jar/yal.jar assets/[nom fichier test].yal
         ```
         en remplaçant [nom fichier test] par le nom d'un fichier `.yal` présent dans le dossier [`assets`](assets/).
+
 Les fichiers MIPS générés sont disponilbles dans le dossier [`assets`](assets/) et portent le même nom que le fichier `.yal` d'origine.
 ***
 ## Outils utilisés ##
