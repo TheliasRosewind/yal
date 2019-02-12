@@ -1,7 +1,6 @@
 package arbre.instructions.conditionnelles;
 
 import arbre.ArbreAbstrait;
-import arbre.BlocDInstructions;
 import arbre.expressions.Expression;
 import arbre.instructions.Instruction;
 import exceptions.NonConcordanceTypeException;

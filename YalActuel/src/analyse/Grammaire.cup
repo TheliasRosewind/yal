@@ -124,9 +124,9 @@ INST    ::=     ECR:e POINTVIRGULE
                 |
                 SI EXP:e ALORS LINST:li FINSI
                 {: RESULT = new SiAlors(e, li, eleft+1); :}
-                ;
-
-BOUCLE  ::=     TANTQUE EXP:e REPETER LINST:li FINTANTQUE
+                |
+                TANTQUE EXP:e REPETER LINST:li FINTANTQUE
+                {: RESULT = new Tantque(e, li, eleft+1) ; :}
                 ;
 
 ECR     ::=     ECRIRE EXP:e
