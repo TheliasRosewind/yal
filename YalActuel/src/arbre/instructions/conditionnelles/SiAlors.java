@@ -13,6 +13,7 @@ public class SiAlors extends Instruction {
 
     protected Expression e;
     protected ArbreAbstrait si;
+    protected int identifiant;
 
     public SiAlors(Expression e, ArbreAbstrait si, int noLigne){
         super(noLigne);
@@ -27,17 +28,17 @@ public class SiAlors extends Instruction {
         if(!e.getType().concorde(new Type(TypesVariable.BOOLEEN))){
             throw new NonConcordanceTypeException(noLigne, " condition nécessite un booléen");
         }
+        identifiant = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
     }
 
     @Override
     public String toMIPS() {
-        int cond = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        return  "          #Début Si Alors" +
-                "     si" + cond + ":\n" +
+        return  "          #Début Si Alors\n" +
+                "     si" + identifiant + ":\n" +
                 e.toMIPS() +
-                "     beq $v0 , $zero ,fsi" + cond + "\n" +
+                "     beq $v0 , $zero ,fsi" + identifiant + "\n" +
                 si.toMIPS() +
-                "     fsi" + cond + ":\n" +
+                "     fsi" + identifiant + ":\n" +
                 "\n";
     }
 }

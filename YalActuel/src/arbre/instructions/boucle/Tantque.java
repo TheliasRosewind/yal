@@ -3,32 +3,24 @@ package arbre.instructions.boucle;
 import arbre.ArbreAbstrait;
 import arbre.expressions.Expression;
 import arbre.instructions.Instruction;
+import arbre.instructions.conditionnelles.SiAlors;
 import exceptions.NonConcordanceTypeException;
 import tds.types.Type;
 import tds.types.TypesVariable;
 
-public class Tantque extends Instruction {
-
-	protected Expression e;
-	protected ArbreAbstrait tantque;
+public class Tantque extends SiAlors {
 
 	public Tantque(Expression e, ArbreAbstrait tantque, int noLigne){
-		super(noLigne);
-		this.tantque = tantque;
-		this.e = e;
-	}
-
-	@Override
-	public void verifier() {
-		e.verifier();
-		tantque.verifier();
-		if(!e.getType().concorde(new Type(TypesVariable.BOOLEEN))){
-			throw new NonConcordanceTypeException(noLigne, " condition nécessite un booléen");
-		}
+		super(e, tantque, noLigne);
 	}
 
 	@Override
 	public String toMIPS() {
-		return null;
+		String condition = super.toMIPS();
+		return  "          #Début Tant Que\n" +
+				condition.substring(condition.indexOf("\n") + 2, condition.indexOf("fsi" + identifiant + ":")) +
+				"j si" + identifiant + "\n" +
+				"     fsi" + identifiant + ":\n" +
+				"\n";
 	}
 }

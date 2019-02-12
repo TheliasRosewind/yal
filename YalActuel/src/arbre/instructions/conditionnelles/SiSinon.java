@@ -16,16 +16,15 @@ public class SiSinon extends SiAlors {
 
 	@Override
 	public String toMIPS() {
-		int cond = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-		return  "          #Début Si Alors Sinon" +
-				"     si" + cond + ":\n" +
+		return  "          #Début Si Alors Sinon\n" +
+				"     si" + identifiant + ":\n" +
 				e.toMIPS() +
-				"     beq $v0 , $zero ,sinon" + cond + "\n" +
+				"     beq $v0 , $zero ,sinon" + identifiant + "\n" +
 				si.toMIPS() +
-				"     b fsi" + cond + "\n" +
-				"     sinon" + cond + ":\n" +
+				"     b fsi" + identifiant + "\n" +
+				"     sinon" + identifiant + ":\n" +
 				sinon.toMIPS() +
-				"     fsi" + cond + ":\n" +
+				"     fsi" + identifiant + ":\n" +
 				"\n";
 	}
 

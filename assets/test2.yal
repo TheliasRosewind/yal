@@ -25,4 +25,9 @@ si y>x alors
     ecrire y/x;
 finsi
 
+tantque x < 10 repeter
+    x = x + 1;
+    ecrire x;
+fintantque
+
 fin

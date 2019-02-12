@@ -53,8 +53,8 @@ public class TDS {
 	}
 
 	public int nextCompteur(TypesCompteurs compteur){
-		int i=compteurs.get(compteur);
-		compteurs.replace(compteur,i+1);
+		int i = compteurs.get(compteur);
+		compteurs.replace(compteur, i + 1);
 		return i;
 	}
 
