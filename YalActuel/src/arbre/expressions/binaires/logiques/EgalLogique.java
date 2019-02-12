@@ -14,15 +14,16 @@ public class EgalLogique extends ExpressionLogique {
     public String toMIPS() {
         String s = super.toMIPS();
         int i = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        return  "     # Début égal\n" +
+        return  "          # Début égal\n" +
                 s +
-                "     # Exécution égal\n" +
+                "          # Exécution égal\n" +
                 "     bne $t8, $v0, cond" + i + "\n" +
                 "     li $v0, 1\n" +
                 "     j fcond" + i + "\n" +
                 "     cond" + i + ":\n" +
                 "     li $v0, 0\n" +
                 "     fcond" + i + ":\n" +
-                "     #Fin égal\n";
+                "          #Fin égal\n" +
+                "\n";
     }
 }

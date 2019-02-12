@@ -16,11 +16,12 @@ public class Programme extends ArbreAbstrait {
 
 	protected static String zoneData = ".data\n" +
 											"finLigne:      .asciiz \"\\n\"\n" +
-											"               .align 2\n" ;
+											"               .align 2\n" +
+											"\n" ;
 
 	protected static String debutCode = ".text\n" +
 										"main :\n" +
-										"     move $s7,$sp                # initialiser $s7 avec $sp\n";
+										"     move $s7,$sp                # initialiser $s7 avec $sp\n" ;
 	protected static String finCode =   "end :\n" +
 									    "     li $v0, 10                  # retour au système\n" +
 									    "     syscall\n" ;
@@ -51,9 +52,9 @@ public class Programme extends ArbreAbstrait {
 		StringBuilder sb = new StringBuilder("") ;
 		sb.append(zoneData) ;
 		sb.append(debutCode) ;
-		sb.append("    add $sp, $sp, ");
+		sb.append("     add $sp, $sp, ");
 		sb.append(TDS.getInstance().getSommetDePile());
-		sb.append("            # réserver la place pour les variables\n");
+		sb.append("           # réserver la place pour les variables\n\n");
 		for (ArbreAbstrait a : programme) {
 			sb.append(a.toMIPS()) ;
 		}

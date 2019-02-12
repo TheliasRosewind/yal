@@ -127,6 +127,9 @@ INST    ::=     ECR:e POINTVIRGULE
                 SI EXP:e ALORS LINST:li FINSI
                 {: RESULT = new SiAlors(e, li, eleft+1); :}
                 |
+                SI EXP:e ALORS LINST:li1 SINON LINST:li2 FINSI
+                {: RESULT = new SiSinon(e, li1, li2, eleft+1); :}
+                |
                 TANTQUE EXP:e REPETER LINST:li FINTANTQUE
                 {: RESULT = new Tantque(e, li, eleft+1) ; :}
                 ;

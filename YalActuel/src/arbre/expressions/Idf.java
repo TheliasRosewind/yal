@@ -27,9 +27,7 @@ public class Idf extends Expression {
 
 	@Override
 	public String toMIPS() {
-		return "" + "     lw $v0, " +
-				dep +
-				"($s7)\n";
+		return  "     lw $v0, " + dep + "($s7)\n";
 	}
 
 	public String getNom() {

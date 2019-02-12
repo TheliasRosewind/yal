@@ -14,15 +14,16 @@ public class Inferieur extends ExpressionLogique {
     public String toMIPS() {
         String s = super.toMIPS();
         int i = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        return  "     # Début inférieur\n" +
+        return  "          # Début inférieur\n" +
                 s +
-                "     # Exécution inférieur\n" +
+                "          # Exécution inférieur\n" +
                 "     bgt $t8, $v0, cond" + i + "\n" +
                 "     li $v0, 1\n" +
                 "     j fcond" + i + "\n" +
                 "     cond" + i + ":\n" +
                 "     li $v0, 0\n" +
                 "     fcond" + i + ":\n" +
-                "     #Fin inférieur\n";
+                "          #Fin inférieur\n" +
+                "\n";
     }
 }

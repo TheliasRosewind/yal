@@ -13,16 +13,17 @@ public class Different extends ExpressionLogique {
     @Override
     public String toMIPS() {
         String s = super.toMIPS();
-        int i=TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        return ("     # Début différent\n" +
+        int i = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
+        return  "          # Début différent\n" +
                 s +
-                "     # Exécution différent\n" +
+                "          # Exécution différent\n" +
                 "     beq $t8, $v0, cond" + i + "\n" +
                 "     li $v0, 1\n" +
                 "     j fcond" + i + "\n" +
                 "     cond" + i + ":\n" +
                 "     li $v0, 0\n" +
                 "     fcond" + i + ":\n" +
-                "     #Fin différent\n");
+                "          #Fin différent\n" +
+                "\n";
     }
 }

@@ -31,12 +31,13 @@ public class SiAlors extends Instruction {
 
     @Override
     public String toMIPS() {
-        int cond= TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        return  "     #Début Si Alors" +
+        int cond = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
+        return  "          #Début Si Alors" +
                 "     si" + cond + ":\n" +
                 e.toMIPS() +
                 "     beq $v0 , $zero ,fsi" + cond + "\n" +
                 si.toMIPS() +
-                "     fsi" + cond + ":\n";
+                "     fsi" + cond + ":\n" +
+                "\n";
     }
 }

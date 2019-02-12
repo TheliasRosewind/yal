@@ -11,10 +11,11 @@ public class Multiplication extends ExpressionArithmetique {
     @Override
     public String toMIPS() {
         String s = super.toMIPS();
-        return "     # Début de la multiplication\n" +
+        return  "          # Début de la multiplication\n" +
                 s +
-                "     # Execution de la multiplication\n" +
+                "          # Execution de la multiplication\n" +
                 "     mul $v0, $t8, $v0\n" +
-                "     #Fin de la multiplication\n";
+                "          #Fin de la multiplication\n" +
+                "\n";
     }
 }

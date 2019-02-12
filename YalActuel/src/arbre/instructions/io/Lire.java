@@ -19,10 +19,11 @@ public class Lire extends Instruction {
 
     @Override
     public String toMIPS() {
-        return  "     # lecture au clavier\n" +
+        return  "          # lecture au clavier\n" +
                 "     li $v0 , 5\n" +
                 "     syscall\n" +
-                "     sw $v0, " + idf.getDeplacement() + "($s7)\n" ;
+                "     sw $v0, " + idf.getDeplacement() + "($s7)\n" +
+                "\n";
     }
 
 }
