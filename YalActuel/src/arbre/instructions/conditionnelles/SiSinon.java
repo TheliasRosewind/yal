@@ -22,7 +22,7 @@ public class SiSinon extends SiAlors {
 				e.toMIPS() +
 				"     beq $v0 , $zero ,sinon" + cond + "\n" +
 				si.toMIPS() +
-				"     b finsi" + cond + "\n" +
+				"     b fsi" + cond + "\n" +
 				"     sinon" + cond + ":\n" +
 				sinon.toMIPS() +
 				"     fsi" + cond + ":\n" +

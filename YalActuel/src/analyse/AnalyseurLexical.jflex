@@ -50,21 +50,21 @@ espace = {finDeLigne}  | [ \t\f]
 
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
-"="                    { return symbol(CodesLexicaux.EGAL);}
-"+"                    { return symbol(CodesLexicaux.PLUS);}
-"-"                    { return symbol(CodesLexicaux.MOINS);}
-"*"                    { return symbol(CodesLexicaux.MULT);}
-"/"                    { return symbol(CodesLexicaux.DIV);}
-"=="                   { return symbol(CodesLexicaux.EGALEGAL);}
-"!="                   { return symbol(CodesLexicaux.DIFF);}
-"<"                    { return symbol(CodesLexicaux.INF);}
-">"                    { return symbol(CodesLexicaux.SUPP);}
-"et"                   { return symbol(CodesLexicaux.ET);}
-"ou"                   { return symbol(CodesLexicaux.OU);}
-"si"                   { return symbol(CodesLexicaux.SI);}
-"alors"                { return symbol(CodesLexicaux.ALORS);}
-"sinon"                { return symbol(CodesLexicaux.SINON);}
-"finsi"                { return symbol(CodesLexicaux.FINSI);}
+"="                    { return symbol(CodesLexicaux.EGAL); }
+"+"                    { return symbol(CodesLexicaux.PLUS); }
+"-"                    { return symbol(CodesLexicaux.MOINS); }
+"*"                    { return symbol(CodesLexicaux.MULT); }
+"/"                    { return symbol(CodesLexicaux.DIV); }
+"=="                   { return symbol(CodesLexicaux.EGALEGAL); }
+"!="                   { return symbol(CodesLexicaux.DIFF); }
+"<"                    { return symbol(CodesLexicaux.INF); }
+">"                    { return symbol(CodesLexicaux.SUPP); }
+"et"                   { return symbol(CodesLexicaux.ET); }
+"ou"                   { return symbol(CodesLexicaux.OU); }
+"si"                   { return symbol(CodesLexicaux.SI); }
+"alors"                { return symbol(CodesLexicaux.ALORS); }
+"sinon"                { return symbol(CodesLexicaux.SINON); }
+"finsi"                { return symbol(CodesLexicaux.FINSI); }
 
 "tantque"              { return symbol(CodesLexicaux.TANTQUE); }
 "repeter"              { return symbol(CodesLexicaux.REPETER); }

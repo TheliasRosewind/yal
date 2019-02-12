@@ -6,6 +6,8 @@ entier y;
 lire x;
 si x==5 alors
     ecrire x;
+sinon
+    ecrire x * 2;
 finsi
 
 si x!=5 alors
