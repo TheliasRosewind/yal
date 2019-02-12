@@ -1,12 +1,13 @@
-package arbre.expressions.binaires.logiques;
+package arbre.expressions.binaires;
 
 import arbre.expressions.Expression;
+import arbre.expressions.binaires.logiques.ExpressionLogique;
 import tds.TDS;
 import tds.types.TypesCompteurs;
 
-public class Superieur extends ExpressionLogique {
+public class EtLogique extends ExpressionBinaire {
 
-    public Superieur(Expression g, Expression d, int n){
+    public EtLogique(Expression g, Expression d, int n){
         super(g,d,n);
     }
 
@@ -14,16 +15,17 @@ public class Superieur extends ExpressionLogique {
     public String toMIPS() {
         String s = super.toMIPS();
         int i = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        return  "          # Début supérieur\n" +
+        return  "          # Début et logique\n" +
                 s +
-                "          # Exécution supérieur\n" +
-                "     ble $t8, $v0, cond" + i + "\n" +
+                "          # Exécution et logique\n" +
+                "     and $v0, $t8, $v0\n" +
+                "     beq $v0, $zero, cond" + i + "\n" +
                 "     li $v0, 1\n" +
                 "     j fcond" + i + "\n" +
                 "     cond" + i + ":\n" +
                 "     li $v0, 0\n" +
                 "     fcond" + i + ":\n" +
-                "          #Fin supérieur\n" +
+                "          #Fin et logique\n" +
                 "\n";
     }
 }

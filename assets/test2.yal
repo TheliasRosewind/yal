@@ -3,6 +3,11 @@ programme test2 debut
 entier x;
 entier y;
 
+si 5==5 alors
+    ecrire 5==5;
+    ecrire 5;
+finsi
+
 lire x;
 si x==5 alors
     ecrire x;
@@ -13,6 +18,10 @@ finsi
 si x!=5 alors
     si x==3 alors
         ecrire 3*x+3;
+    sinon
+        si x!=3 et x!=5 alors
+            ecrire x!=3 ou x==5;
+        finsi
     finsi
 finsi
 
@@ -25,9 +34,10 @@ si y>x alors
     ecrire y/x;
 finsi
 
+lire y;
 tantque x < 10 repeter
     x = x + 1;
-    ecrire x;
+    ecrire - x;
 fintantque
 
 fin

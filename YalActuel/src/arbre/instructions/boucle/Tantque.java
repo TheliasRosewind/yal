@@ -15,7 +15,7 @@ public class Tantque extends SiAlors {
 		String condition = super.toMIPS();
 		return  "          # Début Tant Que\n" +
 				condition.substring(condition.indexOf("\n") + 2, condition.indexOf("fsi" + identifiant + ":")) +
-				"# retour au début de la boucle" +
+				"# retour au début de la boucle\n" +
 				"     j si" + identifiant + "\n" +
 				"     fsi" + identifiant + ":\n" +
 				"\n";

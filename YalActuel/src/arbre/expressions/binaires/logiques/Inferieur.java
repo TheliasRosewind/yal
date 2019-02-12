@@ -17,7 +17,7 @@ public class Inferieur extends ExpressionLogique {
         return  "          # Début inférieur\n" +
                 s +
                 "          # Exécution inférieur\n" +
-                "     bgt $t8, $v0, cond" + i + "\n" +
+                "     bge $t8, $v0, cond" + i + "\n" +
                 "     li $v0, 1\n" +
                 "     j fcond" + i + "\n" +
                 "     cond" + i + ":\n" +
