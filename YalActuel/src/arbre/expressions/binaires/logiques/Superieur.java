@@ -4,9 +4,9 @@ import arbre.expressions.Expression;
 import tds.TDS;
 import tds.types.TypesCompteurs;
 
-public class EgalLogique extends ExpressionLogique {
+public class Superieur extends ExpressionLogique {
 
-    public EgalLogique(Expression g, Expression d, int n){
+    public Superieur(Expression g, Expression d, int n){
         super(g,d,n);
     }
 
@@ -15,16 +15,16 @@ public class EgalLogique extends ExpressionLogique {
         String s = super.toMIPS();
         StringBuilder sb=new StringBuilder();
         int i=TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        sb.append("     # Début égal\n" +
+        sb.append("     # Début supérieur\n" +
                 s +
-                "   # Exécution égal\n" +
-                "   bne $t8, $v0, cond" + i + "\n" +
+                "   # Exécution supérieur\n" +
+                "   blt $t8, $v0, cond" + i + "\n" +
                 "   li $v0, 1\n" +
                 "   j fcond" + i + "\n" +
                 "   cond" + i + ":\n"+
                 "   li $v0, 0\n" +
                 "   fcond" + i + ":\n" +
-                "   #Fin égal\n");
+                "   #Fin supérieur\n");
         return sb.toString();
     }
 }
