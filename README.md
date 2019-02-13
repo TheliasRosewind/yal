@@ -17,6 +17,7 @@ Une fois le projet cloné et ouvert, allez dans *File > Project Structure*.
 - **Ant Build (Linux uniquement)**
 
     Allez dans *Build > Generate Ant Build*. Cochez les cases *Generate single-file ant build*, *Overwrite previously generated files* et *Use JDK definitions from project files*. Vérifiez que le reste est bien décoché, puis `OK`. Ouvrez l'onglet *Ant Build*, et ajoutez  le fichier `yal.xml` tout juste créé.
+    Ouvrez le fichier [`start.sh`](start.sh) et modifiez le chemin des archives [Java CUP](http://www2.cs.tum.edu/projects/cup/) et [JFlex](http://www.jflex.de/) des lignes 7, 9 et 16.
 - **Run (si vous n'utilisez pas Ant Build)**
 
     Allez dans *Run > Edit Configurations*. Ajoutez une configuration en choississant *Application*. Nommez la `Yal`, et choississez la classe principale [`Yal`](YalActuel/src/Yal.java) du module [`YalActuel`](YalActuel/). Dans *Program arguments*, entrez le nom du fichier `.yal` que vous souhaitez compiler en MIPS et choississez en *Working directory* le dossier [`yal/assets`](assets/) (dans lequel sont placé les fichiers `.yal`).
@@ -27,7 +28,7 @@ Une fois le projet cloné et ouvert, allez dans *File > Project Structure*.
 ## Lancer les tests ##
 - **Ant Build**
     
-    Vous n'avez qu'à utiliser la commande `./tests.sh` dans le dossier [`yal`](/).
+    Vous n'avez qu'à utiliser la commande `./start.sh` dans le dossier [`yal`](/).
 - **Run et Artifact JAR**
 
     Vous devrez exécuter systématiquement les commandes suivantes dans le package [`analyse`](YalActuel/src/analyse/) (si vous n'avez que les fichiers [`AnalyseurLexical.jflex`](YalActuel/src/analyse/AnalyseurLexical.jflex) et [`Grammaire.cup`](YalActuel/src/analyse/Grammaire.cup) à l'intérieur et/ou que vous les avez modifiés) :
