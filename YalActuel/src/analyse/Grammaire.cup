@@ -67,12 +67,12 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol PROGRAMME, DEBUT, FIN, POINTVIRGULE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER ;
+terminal Symbol PROGRAMME, DEBUT, FIN, FONCTION, POINTVIRGULE, RETOURNE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER ;
 terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, LIR;
+non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, LDECLVAR, DECLFONC, LDECLFONC, LIR, PARAM, RETO;
 non terminal Expression EXP ;
 
 precedence left ET, OU;
@@ -94,19 +94,48 @@ PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
                 |
                 PROGRAMME IDF DEBUT LINST:li FIN
                 {: Programme p = new Programme();
-               p.ajouter(li);
-               RESULT = p; :}
+                p.ajouter(li);
+                RESULT = p; :}
                 ;
 
-LDECL   ::=     LDECL:ld DECLVAR:d
+LDECL   ::=     LDECLVAR:ldv
+                |
+                LDECLFONC:ldf
+                |
+                LDECL:ld LDECLVAR:ldv
+                |
+                LDECL:ld LDECLFONC:ldf
+                ;
+
+LDECLVAR::=     LDECLVAR:ldv DECLVAR:d
                 |
                 DECLVAR:d
                 ;
 
-DECLVAR ::=     TYPE:t IDF:i POINTVIRGULE
+LDECLFONC::=    LDECLFONC:ldf DECLFONC:d
+                |
+                DECLFONC:d
+                ;
+
+DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                 {: int dep = TDS.getInstance().newDeplacement() ;
                    TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep, t)) ;
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
+                ;
+
+DECLFONC ::=    FONCTION IDF:i LPARAM:lp DEBUT LINST:li FIN
+                {: Fonction f = new Fonction(i, li, ileft + 1);
+
+                :}
+                ;
+
+LPARAM  ::=     LPAARAM:lp PARAM:p
+                |
+                PARAM:p
+                ;
+
+PARAM   ::=     POUV PFER
+                {: :}
                 ;
 
 LINST   ::=     LINST:li INST:i
@@ -117,6 +146,11 @@ LINST   ::=     LINST:li INST:i
                 {: BlocDInstructions b = new BlocDInstructions(ileft + 1) ;
                    b.ajouter(i) ;
                    RESULT = b ; :}
+                ;
+
+RETO    ::=     RETOURNE EXP:e POINTVIRGULE
+                |
+                RETOURNE POINTVIRGULE
                 ;
 
 INST    ::=     ECR:e POINTVIRGULE
