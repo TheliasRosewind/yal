@@ -34,7 +34,6 @@ import exceptions.AnalyseLexicaleException;
 idf = [A-Za-z_][A-Za-z_0-9]*
 
 csteE = [0-9]+
-guillemet = [\"]
 commentaire = [/][/].*
 
 finDeLigne = \r|\n
@@ -45,6 +44,8 @@ espace = {finDeLigne}  | [ \t\f]
 "programme"            { return symbol(CodesLexicaux.PROGRAMME); }
 "debut"                { return symbol(CodesLexicaux.DEBUT); }
 "fin"              	   { return symbol(CodesLexicaux.FIN); }
+"fonction"             { return symbol(CodesLexicaux.FONCTION); }
+"retourne"             { return symbol(CodesLexicaux.RETOURNE); }
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 
