@@ -70,5 +70,5 @@ Les anciennes versions du projet sont disponibles dans le dossier [Versions](Ver
 - [x] README détaillé
 - [ ] Documentation du langage yal
 - [ ] Description des différentes versions
-- [ ] Ajout de plus de fichiers tests
+- [x] Ajout de plus de fichiers tests
 - [ ] Documentation du code

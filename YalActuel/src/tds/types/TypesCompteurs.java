@@ -1,5 +1,15 @@
 package tds.types;
 
+/**
+ * Type des compteurs d'identifiant des blocs
+ */
 public enum TypesCompteurs {
-    CONDITIONNELLES, BLOCS
+	/**
+	 * Type des blocs conditionnels (si et tanque)
+	 */
+    CONDITIONNELLES,
+	/**
+	 * Type
+	 */
+    BLOCS
 }

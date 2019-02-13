@@ -1,6 +1,7 @@
-package arbre.expressions.binaires;
+package arbre.expressions.binaires.logiques;
 
 import arbre.expressions.Expression;
+import arbre.expressions.binaires.ExpressionBinaire;
 import exceptions.NonConcordanceTypeException;
 import tds.TDS;
 import tds.types.Type;
@@ -17,7 +18,7 @@ public class OuLogique extends ExpressionBinaire {
     public void verifier() {
         super.verifier();
         if(!(gauche.getType().concorde(new Type(TypesVariable.BOOLEEN)) && droite.getType().concorde(new Type(TypesVariable.BOOLEEN)))){
-            throw new NonConcordanceTypeException(noLigne,"Ou logique nécessite deux booléens : ");
+            throw new NonConcordanceTypeException(noLigne, "OuLogique logique nécessite deux booléens");
         }
     }
 
@@ -34,8 +35,6 @@ public class OuLogique extends ExpressionBinaire {
                 "     j fcond" + i + "\n" +
                 "     cond" + i + ":\n" +
                 "     li $v0, 0\n" +
-                "     fcond" + i + ":\n" +
-                "          #Fin ou logique\n" +
-                "\n";
+                "     fcond" + i + ":\n\n";
     }
 }

@@ -1,5 +1,19 @@
 package tds.types;
 
+/**
+ * Les types de variables possibles
+ */
 public enum TypesVariable {
-    ENTIER, TABLEAU, BOOLEEN
+	/**
+	 * Type entier
+	 */
+    ENTIER,
+	/**
+	 * Type booléen
+	 */
+    BOOLEEN,
+	/**
+	 * Type tableau
+	 */
+    TABLEAU
 }

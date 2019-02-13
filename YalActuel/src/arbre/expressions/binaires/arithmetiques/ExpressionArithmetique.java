@@ -16,7 +16,7 @@ public abstract class ExpressionArithmetique extends ExpressionBinaire {
     public void verifier() {
         super.verifier();
         if(!(gauche.getType().concorde(new Type(TypesVariable.ENTIER)) && droite.getType().concorde(new Type(TypesVariable.ENTIER)))){
-            throw new NonConcordanceTypeException(noLigne, " expression arithmétique requiert deux entiers");
+            throw new NonConcordanceTypeException(noLigne, "Expression arithmétique requiert deux entiers");
         }
     }
 }

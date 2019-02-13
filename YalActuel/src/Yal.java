@@ -8,7 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Yal {
-    
+
+    /**
+     * Lance la compilation en MIPS du fichier indiqué
+     * @param nomFichier nom du fichier à compiler
+     */
     public Yal(String nomFichier) {
         try {
             AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new FileReader(nomFichier)));

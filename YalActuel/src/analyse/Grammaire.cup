@@ -175,7 +175,7 @@ EXP     ::=     EXP:g PLUS EXP:d
                 {: RESULT = new Different(g, d, gleft+1) ; :}
                 |
                 MOINS EXP:g
-                {: RESULT = new Negation(g, gleft+1);:}
+                {: RESULT = new Negatif(g, gleft+1);:}
                 |
                 NON EXP:g
                 {: RESULT = new NonLogique(g, gleft+1);:}

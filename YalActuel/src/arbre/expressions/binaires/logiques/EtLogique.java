@@ -1,6 +1,7 @@
-package arbre.expressions.binaires;
+package arbre.expressions.binaires.logiques;
 
 import arbre.expressions.Expression;
+import arbre.expressions.binaires.ExpressionBinaire;
 import arbre.expressions.binaires.logiques.ExpressionLogique;
 import tds.TDS;
 import tds.types.TypesCompteurs;
@@ -24,8 +25,6 @@ public class EtLogique extends ExpressionBinaire {
                 "     j fcond" + i + "\n" +
                 "     cond" + i + ":\n" +
                 "     li $v0, 0\n" +
-                "     fcond" + i + ":\n" +
-                "          #Fin et logique\n" +
-                "\n";
+                "     fcond" + i + ":\n\n";
     }
 }

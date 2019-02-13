@@ -38,7 +38,7 @@ public class SiAlors extends Instruction {
         si.verifier();
         if (this.aSinon) sinon.verifier();
         if(!e.getType().concorde(new Type(TypesVariable.BOOLEEN))){
-            throw new NonConcordanceTypeException(noLigne, " condition nécessite un booléen");
+            throw new NonConcordanceTypeException(noLigne, "Condition nécessite un booléen");
         }
         identifiant = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
     }

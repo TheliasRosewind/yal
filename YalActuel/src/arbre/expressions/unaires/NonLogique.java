@@ -20,7 +20,7 @@ public class NonLogique extends Expression {
     public void verifier() {
         exp.verifier();
         if(!exp.getType().concorde(new Type(TypesVariable.BOOLEEN))){
-            throw new NonConcordanceTypeException(noLigne,"Non logique nécessite un booléen ");
+            throw new NonConcordanceTypeException(noLigne, "Non logique nécessite un booléen ");
         }
     }
 
@@ -32,18 +32,13 @@ public class NonLogique extends Expression {
     @Override
     public String toMIPS() {
         int i = TDS.getInstance().nextCompteur(TypesCompteurs.CONDITIONNELLES);
-        StringBuilder sb=new StringBuilder();
-        sb.append("        # Début du non logique \n" +
+        return  "          # Début du non logique \n" +
                 exp.toMIPS() +
                 "     beq $v0, $zero, cond" + i + "\n" +
                 "     li $v0, 0\n" +
                 "     j fcond" + i + "\n" +
                 "     cond" + i + ":\n" +
                 "     li $v0, 1\n" +
-                "     fcond" + i + ":\n" +
-                "          #Fin et logique\n" +
-                "\n"
-        );
-        return sb.toString();
+                "     fcond" + i + ":\n\n";
     }
 }
