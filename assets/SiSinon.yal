@@ -1,0 +1,38 @@
+programme SiSinon debut
+
+    // Déclarations
+    entier x;
+    entier y;
+
+    si  2 + 3 == 5 alors
+        ecrire 2 + 3 == 5;
+        ecrire 5;
+    finsi
+
+    lire x;
+    si x == 5 alors
+        ecrire x;
+    sinon
+        ecrire x * 2;
+    finsi
+
+    si x != 5 alors
+        si x == 3 alors
+            ecrire 3 * x + 3;
+        sinon
+            si x != 3 et x != 5 alors
+                ecrire x != 3 ou x == 5;
+            finsi
+        finsi
+    finsi
+
+    lire y;
+    si y < x alors
+        ecrire x * y;
+    finsi
+
+    si y > x alors
+        ecrire y / x;
+    finsi
+
+fin

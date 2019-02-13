@@ -1,0 +1,27 @@
+programme LectureEcriture debut
+
+    // Déclarations
+    entier a;
+    entier b;
+    entier c;
+    entier d;
+    entier e;
+    entier f;
+
+    // Lecture
+    lire a;
+    lire b;
+    lire c;
+    lire d;
+    lire e;
+    lire f;
+
+    // Ecriture
+    ecrire a;
+    ecrire b;
+    ecrire c;
+    ecrire d;
+    ecrire e;
+    ecrire f;
+
+fin

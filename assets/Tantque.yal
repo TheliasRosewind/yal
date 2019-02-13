@@ -1,0 +1,27 @@
+programme Tantque debut
+
+    // Déclarations
+    entier x;
+    entier y;
+
+    lire x;
+    x = x / x;
+
+    // Incrémentation
+    tantque x < 10 repeter
+        x = x + 1;
+    fintantque
+
+    // Décrémentation
+    tantque x > 10 repeter
+        x = x - 1;
+    fintantque
+
+    y = 0;
+
+    // Relecture
+    tantque y == 0 repeter
+        lire y;
+    fintantque
+
+fin

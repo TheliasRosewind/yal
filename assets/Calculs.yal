@@ -1,0 +1,38 @@
+programme Calculs debut
+
+    // Déclarations
+    entier x;
+    entier y;
+    entier z;
+
+    //Instructions
+
+    // Additions
+    x = 5 + 3;
+    ecrire x;
+
+    z = x + 50;
+    ecrire z;
+
+    // Soustractions
+    ecrire 38 - 25;
+
+    ecrire x - y;
+
+    // Multiplication
+    y = 5 * 6;
+    ecrire y;
+
+    z = x * y;
+    ecrire z;
+
+    // Division
+    x = 9 / 3;
+    ecrire x;
+
+    ecrire y / x;
+
+    // Tout
+    ecrire 5 + 50 / 5 - 2 * 20;
+
+fin

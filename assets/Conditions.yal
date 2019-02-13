@@ -1,0 +1,29 @@
+programme Conditions debut
+
+    // Déclarations
+    entier x;
+    entier y;
+
+    lire x;
+
+    si x < 10 alors
+        tantque x < 10 repeter
+            x = x + 1;
+        fintantque
+    sinon
+        tantque x > 10 repeter
+            x = x - 1;
+        fintantque
+    finsi
+
+    y = 0;
+    x = 10;
+
+    tantque y < 50 repeter
+        si y / 2 == x alors
+            x = x + 10;
+        finsi
+        y = y + 1;
+    fintantque
+
+fin

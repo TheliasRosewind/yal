@@ -65,9 +65,9 @@ espace = {finDeLigne}  | [ \t\f]
 "alors"                { return symbol(CodesLexicaux.ALORS); }
 "sinon"                { return symbol(CodesLexicaux.SINON); }
 "finsi"                { return symbol(CodesLexicaux.FINSI); }
-"non"                  { return symbol(CodesLexicaux.NON);}
-"("                    { return symbol(CodesLexicaux.POUV);}
-")"                    { return symbol(CodesLexicaux.PFER);}
+"non"                  { return symbol(CodesLexicaux.NON); }
+"("                    { return symbol(CodesLexicaux.POUV); }
+")"                    { return symbol(CodesLexicaux.PFER); }
 
 "tantque"              { return symbol(CodesLexicaux.TANTQUE); }
 "repeter"              { return symbol(CodesLexicaux.REPETER); }

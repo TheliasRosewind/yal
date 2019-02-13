@@ -1,0 +1,9 @@
+programme DoubleDeclaration debut
+
+    // Déclarations
+    entier a;
+    entier a;
+
+    a = 10;
+
+fin

@@ -1,0 +1,26 @@
+programme AffectationEcriture debut
+
+    // Déclarations
+    entier a;
+    entier b;
+    entier c;
+    entier d;
+    entier e;
+    entier f;
+
+    // Affectations
+    a = 1;
+    b = 10;
+    c = 100;
+    d = 1000;
+    e = 10000;
+
+    // Ecriture
+    ecrire a;
+    ecrire b;
+    ecrire c;
+    ecrire d;
+    ecrire e;
+    ecrire f;
+
+fin

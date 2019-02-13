@@ -1,0 +1,15 @@
+programme VariableNonDeclaree debut
+
+    entier b;
+    entier c;
+
+    a = 1;
+    b = a;
+    c = b;
+
+    ecrire a;
+    ecrire b;
+    ecrire c;
+    ecrire f;
+
+fin
