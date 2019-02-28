@@ -2,6 +2,7 @@ package analyse;
 
 import java.util.*;
 import arbre.* ;
+import arbre.bloc.* ;
 import arbre.expressions.* ;
 import arbre.expressions.unaires.* ;
 import arbre.expressions.binaires.* ;
@@ -72,7 +73,7 @@ terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, LDECLVAR, DECLFONC, LDECLFONC, LIR, PARAM, RETO;
+non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, DECLFONC, LIR, RET;
 non terminal Expression EXP ;
 
 precedence left ET, OU;
@@ -98,23 +99,13 @@ PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
                 RESULT = p; :}
                 ;
 
-LDECL   ::=     LDECLVAR:ldv
+LDECL   ::=     DECLVAR:dv
                 |
-                LDECLFONC:ldf
+                DECLFONC:df
                 |
-                LDECL:ld LDECLVAR:ldv
+                LDECL:ld DECLVAR:dv
                 |
-                LDECL:ld LDECLFONC:ldf
-                ;
-
-LDECLVAR::=     LDECLVAR:ldv DECLVAR:d
-                |
-                DECLVAR:d
-                ;
-
-LDECLFONC::=    LDECLFONC:ldf DECLFONC:d
-                |
-                DECLFONC:d
+                LDECL:ld DECLFONC:df
                 ;
 
 DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
@@ -123,19 +114,8 @@ DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 ;
 
-DECLFONC ::=    FONCTION IDF:i LPARAM:lp DEBUT LINST:li FIN
-                {: Fonction f = new Fonction(i, li, ileft + 1);
-
-                :}
-                ;
-
-LPARAM  ::=     LPAARAM:lp PARAM:p
-                |
-                PARAM:p
-                ;
-
-PARAM   ::=     POUV PFER
-                {: :}
+DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
+                {: RESULT = new Fonction(i, li, ileft + 1); :}
                 ;
 
 LINST   ::=     LINST:li INST:i
@@ -148,11 +128,6 @@ LINST   ::=     LINST:li INST:i
                    RESULT = b ; :}
                 ;
 
-RETO    ::=     RETOURNE EXP:e POINTVIRGULE
-                |
-                RETOURNE POINTVIRGULE
-                ;
-
 INST    ::=     ECR:e POINTVIRGULE
                 {: RESULT = e ; :}
                 |
@@ -161,6 +136,9 @@ INST    ::=     ECR:e POINTVIRGULE
                 |
                 LIR:l POINTVIRGULE
                 {: RESULT = l ; :}
+                |
+                RET:r POINTVIRGULE
+                {: RESULT = r ; :}
                 |
                 SI EXP:e ALORS LINST:li FINSI
                 {: RESULT = new SiAlors(e, li, eleft+1); :}
@@ -182,6 +160,10 @@ AFF     ::=     IDF:i EGAL EXP:e
 
 LIR     ::=     LIRE IDF:i
                 {: RESULT = new Lire(i, ileft+1) ; :}
+                ;
+
+RET    ::=     RETOURNE EXP:e
+                {: RESULT = new Retourne(e, eleft + 1); :}
                 ;
 
 EXP     ::=     EXP:g PLUS EXP:d

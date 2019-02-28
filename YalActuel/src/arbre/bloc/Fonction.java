@@ -5,9 +5,10 @@ import arbre.ArbreAbstrait;
 public class Fonction extends ArbreAbstrait{
 
 	protected ArbreAbstrait instruction;
+
 	protected String nomFonc;
 
-	protected Fonction(String nom, ArbreAbstrait ins, int n) {
+	public Fonction(String nom, ArbreAbstrait ins, int n) {
 		super(n);
 	}
 
@@ -18,6 +19,7 @@ public class Fonction extends ArbreAbstrait{
 
 	@Override
 	public String toMIPS() {
-		return null;
+		return null; // TODO
 	}
+
 }
