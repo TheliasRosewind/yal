@@ -1,6 +1,7 @@
-package arbre.instructions;
+package arbre.instructions.fonctions;
 
 import arbre.expressions.Expression;
+import arbre.instructions.Instruction;
 
 public class Retourne extends Instruction {
 

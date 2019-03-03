@@ -1,4 +1,4 @@
-package arbre.bloc;
+package arbre.instructions.declarations;
 
 import arbre.ArbreAbstrait;
 
@@ -6,10 +6,12 @@ public class Fonction extends ArbreAbstrait{
 
 	protected ArbreAbstrait instruction;
 
-	protected String nomFonc;
+	protected String nom;
 
 	public Fonction(String nom, ArbreAbstrait ins, int n) {
 		super(n);
+		this.nom=nom;
+		this.instruction=ins;
 	}
 
 	@Override

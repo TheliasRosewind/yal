@@ -1,4 +1,6 @@
-package arbre;
+package arbre.bloc;
+
+import arbre.ArbreAbstrait;
 
 import java.util.ArrayList;
 

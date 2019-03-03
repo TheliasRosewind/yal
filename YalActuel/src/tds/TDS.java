@@ -38,7 +38,7 @@ public class TDS {
 		this.sommetDePile = 0;
 		this.compteurs = new HashMap<>();
 		compteurs.put(TypesCompteurs.CONDITIONNELLES, 0);
-		compteurs.put(TypesCompteurs.BLOCS, 0);
+		compteurs.put(TypesCompteurs.FONCTIONS, 0);
 	}
 
 	/**

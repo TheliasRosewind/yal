@@ -1,0 +1,10 @@
+programme Fonctions debut
+entier a;
+fonction f1() debut
+    a=3;
+    retourne a;
+fin
+
+a=f1();
+
+fin

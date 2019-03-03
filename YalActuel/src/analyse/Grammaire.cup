@@ -12,6 +12,8 @@ import arbre.instructions.* ;
 import arbre.instructions.conditionnelles.* ;
 import arbre.instructions.io.*;
 import arbre.instructions.boucle.* ;
+import arbre.instructions.fonctions.*;
+import arbre.instructions.declarations.*;
 import exceptions.AnalyseSyntaxiqueException;
 import tds.TDS;
 import tds.entrees.*;
@@ -115,7 +117,11 @@ DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                 ;
 
 DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
-                {: RESULT = new Fonction(i, li, ileft + 1); :}
+                {:
+                int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
+                TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
+                RESULT = new Fonction(i, li, ileft + 1);
+                :}
                 ;
 
 LINST   ::=     LINST:li INST:i
@@ -210,4 +216,7 @@ EXP     ::=     EXP:g PLUS EXP:d
                 |
                 POUV EXP:e PFER
                 {: RESULT = e; :}
+                |
+                IDF:i POUV PFER
+                {: RESULT = new AppelFonction(i,ileft+1);:}
                 ;

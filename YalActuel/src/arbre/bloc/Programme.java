@@ -1,5 +1,6 @@
-package arbre;
+package arbre.bloc;
 
+import arbre.ArbreAbstrait;
 import tds.TDS;
 
 import java.util.ArrayList;

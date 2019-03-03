@@ -11,5 +11,5 @@ public enum TypesCompteurs {
 	/**
 	 * Type
 	 */
-    BLOCS
+    FONCTIONS
 }
