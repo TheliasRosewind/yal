@@ -22,7 +22,8 @@ public class AppelFonction extends Expression {
 
 	@Override
 	public String toMIPS() {
-		return null; // TODO
+		StringBuilder sb=new StringBuilder();
+		return sb.toString(); // TODO
 	}
 
 	@Override
