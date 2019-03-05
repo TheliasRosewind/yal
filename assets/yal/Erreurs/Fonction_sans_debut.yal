@@ -1,8 +1,9 @@
 programme Fonction debut
-fonction f1()
-    ecrire 4;
-fin
 
-ecrire f1();
+    fonction f1()
+        retourne 4;
+    fin
+
+    ecrire f1();
 
 fin
