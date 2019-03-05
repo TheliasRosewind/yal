@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * Exception levée lorsque le programme tente d'utiliser une variable qui n'a pas été déclarée précédemment
+ * Exception levée lorsque le programme tente d'utiliser "retourne" alors qu'il n'est pas dans une fonction
  */
 public class RetourSansFonctionException extends AnalyseSemantiqueException {
 

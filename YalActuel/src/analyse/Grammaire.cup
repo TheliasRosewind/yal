@@ -132,11 +132,11 @@ DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 ;
 
-DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
+DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li RET:r FIN
                 {:
                 int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
                 TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
-                Fonction f=new Fonction(i,li,ileft + 1);
+                Fonction f=new Fonction(i,li,(Retourne)r,ileft + 1);
                 RESULT = f;
                 :}
                 ;
@@ -160,7 +160,7 @@ INST    ::=     ECR:e POINTVIRGULE
                 LIR:l POINTVIRGULE
                 {: RESULT = l ; :}
                 |
-                RET:r POINTVIRGULE
+                RET:r
                 {: RESULT = r ; :}
                 |
                 SI EXP:e ALORS LINST:li FINSI
@@ -173,6 +173,10 @@ INST    ::=     ECR:e POINTVIRGULE
                 {: RESULT = new Tantque(e, li, eleft+1) ; :}
                 ;
 
+RET    ::=     RETOURNE EXP:e POINTVIRGULE
+                {: RESULT = new Retourne(e, eleft + 1); :}
+                ;
+
 ECR     ::=     ECRIRE EXP:e
                 {: RESULT = new Ecrire(e, eleft + 1) ; :}
                 ;
@@ -183,10 +187,6 @@ AFF     ::=     IDF:i EGAL EXP:e
 
 LIR     ::=     LIRE IDF:i
                 {: RESULT = new Lire(i, ileft+1) ; :}
-                ;
-
-RET    ::=     RETOURNE EXP:e
-                {: RESULT = new Retourne(e, eleft + 1); :}
                 ;
 
 EXP     ::=     EXP:g PLUS EXP:d
