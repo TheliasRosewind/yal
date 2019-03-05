@@ -1,0 +1,29 @@
+programme Fonctions debut
+
+    entier a;
+    entier b;
+
+    fonction f1() debut
+        si a < 5 alors
+            lire b;
+            retourne 1;
+        sinon
+            retourne 10;
+        finsi
+    fin
+
+    fonction f2() debut
+        lire b;
+        retourne a;
+    fin
+
+    lire a;
+    si (a<10) alors
+        ecrire f1();
+    sinon
+        ecrire f2();
+    finsi
+
+    ecrire b;
+
+fin
