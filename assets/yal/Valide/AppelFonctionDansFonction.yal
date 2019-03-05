@@ -1,0 +1,14 @@
+programme AppelFonctionDansFonction debut
+
+    fonction f1() debut
+        ecrire 4;
+    fin
+
+    fonction f2() debut
+        ecrire f1()*f1();
+    fin
+
+    ecrire f2();
+    ecrire f1()*f1();
+
+fin
