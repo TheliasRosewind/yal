@@ -5,7 +5,7 @@ programme AppelFonctionDansFonction debut
     fin
 
     fonction f2() debut
-        retourne f1() * f1();
+        retourne f1()*f1();
     fin
 
     ecrire f2();

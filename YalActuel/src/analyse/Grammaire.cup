@@ -132,7 +132,15 @@ DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 ;
 
-DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li RET:r FIN
+DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT RET:r FIN
+                {:
+                int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
+                TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
+                Fonction f=new Fonction(i,new BlocDInstructions(ileft+1),(Retourne)r,ileft + 1);
+                RESULT = f;
+                :}
+                |
+                FONCTION IDF:i POUV PFER DEBUT LINST:li RET:r FIN
                 {:
                 int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
                 TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
