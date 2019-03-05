@@ -27,7 +27,8 @@ public class AppelFonction extends Expression {
 		sb.append("	#Appel de fonction\n" +
 				"	addi $sp, $sp, -4 #Réservation de la place pour la valeur de retour\n" +
 				"	jal FCT_" + ((SymboleFonction)TDS.getInstance().identifier(new EntreeFonction(idf,noLigne))).getNum() + "\n" +
-				"	lw $v0, 4($sp)	#Récupération de la valeur de retour\n");
+				"	lw $v0, 4($sp)	#Récupération de la valeur de retour\n" +
+				"	addi $sp, $sp, 4\n");
 		return sb.toString();
 	}
 
