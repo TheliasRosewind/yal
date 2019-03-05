@@ -128,7 +128,7 @@ DECL     ::=    DECLVAR:dv
 
 DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                 {: int dep = TDS.getInstance().newDeplacement() ;
-                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep,  TDS.getInstance().getProfondeurActuelle(),  t)) ;
+                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep,  t)) ;
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 ;
 

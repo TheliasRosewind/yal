@@ -9,7 +9,6 @@ import tds.types.TypesVariable;
 public class SymboleVariable extends Symbole {
 
 	private int deplacement;
-	private int imbrication;
 	private Type type;
 
 	/**
@@ -17,19 +16,14 @@ public class SymboleVariable extends Symbole {
 	 * @param deplacement emplacement de la variable dans la pile
 	 * @param type type de la variable
 	 */
-	public SymboleVariable(int deplacement, int imbrication, String type){
+	public SymboleVariable(int deplacement, String type){
 		this.deplacement = deplacement;
-		this.imbrication = imbrication;
 		this.type = new Type(TypesVariable.valueOf(type.toUpperCase()));
 	}
 
 	@Override
 	public int getDeplacement() {
 		return deplacement;
-	}
-
-	public int getImbrication() {
-		return imbrication;
 	}
 
 	@Override
