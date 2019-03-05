@@ -5,9 +5,8 @@ fonction f1() debut
     si a < 5 alors
         lire b;
         retourne 1;
-    sinon
-        retourne 10;
     finsi
+    retourne 10;
 fin
 fonction f2() debut
     lire b;

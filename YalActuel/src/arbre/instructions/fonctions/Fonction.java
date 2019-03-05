@@ -1,30 +1,30 @@
 package arbre.instructions.fonctions;
 
 import arbre.ArbreAbstrait;
-import arbre.bloc.BlocDInstructions;
-import exceptions.FonctionSansRetourException;
 import tds.TDS;
 import tds.entrees.EntreeFonction;
 import tds.symboles.SymboleFonction;
-
-import java.util.ArrayList;
 
 public class Fonction extends ArbreAbstrait{
 
 	protected ArbreAbstrait instruction;
 
+	protected Retourne ret;
+
 	protected String nom;
 
-	public Fonction(String nom, ArbreAbstrait a, int n) {
+	public Fonction(String nom, ArbreAbstrait a, Retourne r, int n) {
 		super(n);
 		this.nom=nom;
 		this.instruction=a;
+		this.ret=r;
 	}
 
 	@Override
 	public void verifier() {
 		TDS.getInstance().entreeBloc();
 		instruction.verifier();
+		ret.verifier();
 		TDS.getInstance().sortieBloc();
 	}
 
@@ -40,6 +40,7 @@ public class Fonction extends ArbreAbstrait{
 				//"	move $s7, $sp #Mise en place de la nouvelle base locale\n" +
 				"	#Corps de la fonction\n");
 				sb.append(instruction.toMIPS());
+				sb.append(ret.toMIPS());
 				sb.append("		#Fin de la fonction\n" +
 				"	FIN_FCT_" + sf.getNum() + ":\n" +
 				"	addi $sp, $sp, 4 #Remise en place du sommet de pile\n" +
