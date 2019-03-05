@@ -3,6 +3,7 @@ package arbre.expressions;
 import tds.TDS;
 import tds.entrees.EntreeVariable;
 import tds.symboles.Symbole;
+import tds.symboles.SymboleVariable;
 import tds.types.Type;
 
 public class Idf extends Expression {
@@ -20,8 +21,8 @@ public class Idf extends Expression {
 
 	@Override
 	public void verifier() {
-		Symbole s = TDS.getInstance().identifier(new EntreeVariable(nom, noLigne));
-		dep = s.getDeplacement();
+		SymboleVariable s = (SymboleVariable)TDS.getInstance().identifier(new EntreeVariable(nom, noLigne));
+		dep = s.getDeplacement();//+(TDS.getInstance().getProfondeurActuelle()-s.getImbrication())*12;
 		type = s.getType();
 	}
 

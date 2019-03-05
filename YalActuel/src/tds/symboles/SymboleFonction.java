@@ -20,7 +20,7 @@ public class SymboleFonction extends Symbole {
 
 	@Override
 	public int getDeplacement() {
-		return 16;
+		return 12;
 	}
 
 	@Override

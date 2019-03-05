@@ -75,7 +75,7 @@ terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, DECLFONC, LIR, RET;
+non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, DECLFONC, LIR, RET, DECL;
 non terminal Expression EXP ;
 
 precedence left ET, OU;
@@ -92,7 +92,7 @@ start with PROG ;
 
 PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
                 {: Programme p = new Programme();
-                p.ajouter(ld);
+                p.ajouterDeclaration(ld);
                 p.ajouter(li);
                 RESULT = p ; :}
                 |
@@ -102,30 +102,33 @@ PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
                 RESULT = p; :}
                 ;
 
-LDECL   ::=     DECLVAR:dv
-                {: BlocDInstructions b = new BlocDInstructions(dvleft+1);
-                b.ajouter(dv);
+LDECL   ::=     DECL:d
+                {: BlocDInstructions b = new BlocDInstructions(dleft+1);
+                b.ajouter(d);
                 RESULT=b;
                 :}
                 |
-                DECLFONC:df
-                {: BlocDInstructions b = new BlocDInstructions(dfleft+1);
-                    b.ajouter(df);
-                    RESULT = b;
+                LDECL:ld DECL:d
+                {:
+                    ((BlocDInstructions)ld).ajouter(d);
+                    RESULT = ld;
+                :}
+                ;
+
+DECL     ::=    DECLVAR:dv
+                {:
+                    RESULT = dv;
                 :}
                 |
-                LDECL:ld DECLVAR:dv
-                |
-                LDECL:ld DECLFONC:df
+                DECLFONC:df
                 {:
-                    ((BlocDInstructions)ld).ajouter(df);
-                    RESULT = ld;
+                    RESULT = df;
                 :}
                 ;
 
 DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                 {: int dep = TDS.getInstance().newDeplacement() ;
-                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep, t)) ;
+                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep,  TDS.getInstance().getProfondeurActuelle(),  t)) ;
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 ;
 
@@ -133,7 +136,8 @@ DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
                 {:
                 int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
                 TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
-                RESULT = new Fonction(i, li, ileft + 1);
+                Fonction f=new Fonction(i,li,ileft + 1);
+                RESULT = f;
                 :}
                 ;
 

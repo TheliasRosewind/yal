@@ -24,7 +24,10 @@ public class TDS {
 	 * Permet de compter le nombre de bloc de chaque type, afin d'avoir des identifiants uniques
 	 */
 	private HashMap<TypesCompteurs, Integer> compteurs;
-
+	/*
+	 * Profondeur actuelle du bloc
+	 */
+	private int profondeurActuelle;
 	/*
 	 * Instance de la table des symboles
 	 */
@@ -36,9 +39,11 @@ public class TDS {
 	private TDS(){
 		this.tds = new HashMap<>();
 		this.sommetDePile = 0;
+		this.profondeurActuelle=0;
 		this.compteurs = new HashMap<>();
 		compteurs.put(TypesCompteurs.CONDITIONNELLES, 0);
 		compteurs.put(TypesCompteurs.FONCTIONS, 0);
+		compteurs.put(TypesCompteurs.BLOCS, -1);
 	}
 
 	/**
@@ -104,10 +109,22 @@ public class TDS {
 		return i;
 	}
 
-	/*
-	public int getTailleZoneVariable(Entree e, Symbole s) {
-		return 0;
+	public int getCompteur(TypesCompteurs compteur){
+		return this.compteurs.get(compteur);
 	}
-	*/
 
+	public void entreeBloc(){
+		sommetDePile-=12;
+		profondeurActuelle++;
+		nextCompteur(TypesCompteurs.BLOCS);
+	}
+
+	public void sortieBloc(){
+		sommetDePile+=12;
+		profondeurActuelle--;
+	}
+
+	public int getProfondeurActuelle() {
+		return profondeurActuelle;
+	}
 }
