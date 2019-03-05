@@ -1,0 +1,8 @@
+programme Fonction debut
+fonction f1()
+    ecrire 4;
+fin
+
+ecrire f1();
+
+fin
