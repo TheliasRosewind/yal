@@ -1,5 +1,4 @@
 programme Fonctions debut
-
     entier a;
     entier b;
 
@@ -7,9 +6,8 @@ programme Fonctions debut
         si a < 5 alors
             lire b;
             retourne 1;
-        sinon
-            retourne 10;
         finsi
+        retourne 10;
     fin
 
     fonction f2() debut
@@ -18,6 +16,7 @@ programme Fonctions debut
     fin
 
     lire a;
+
     si (a<10) alors
         ecrire f1();
     sinon
