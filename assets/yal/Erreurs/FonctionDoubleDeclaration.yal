@@ -1,0 +1,13 @@
+programme FonctionDoubleDeclaration debut
+
+    fonction f1() debut
+        retourne 4;
+    fin
+
+    fonction f1() debut
+        retourne 5;
+    fin
+
+    ecrire f1();
+
+fin
