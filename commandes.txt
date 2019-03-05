@@ -17,3 +17,12 @@ java -jar C:/Users/Cottens/IdeaProjects/Toucan_Librairies/java-cup-11b.jar -pars
 
 * JFlex
 java -jar C:/Users/Cottens/IdeaProjects/Toucan_Librairies/jflex-full-1.7.0.jar AnalyseurLexical.jflex
+
+=======================================
+
+Commandes Talison :
+* Cup
+java -jar ../../../java-cup-11a.jar -parser AnalyseurSyntaxique -symbols CodesLexicaux Grammaire.cup
+
+* JFlex
+java -jar ../../../jflex-1.6.1.jar AnalyseurLexical.jflex

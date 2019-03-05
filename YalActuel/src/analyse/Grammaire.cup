@@ -92,6 +92,7 @@ start with PROG ;
 
 PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
                 {: Programme p = new Programme();
+                p.ajouter(ld);
                 p.ajouter(li);
                 RESULT = p ; :}
                 |
@@ -102,12 +103,24 @@ PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
                 ;
 
 LDECL   ::=     DECLVAR:dv
+                {: BlocDInstructions b = new BlocDInstructions(dvleft+1);
+                b.ajouter(dv);
+                RESULT=b;
+                :}
                 |
                 DECLFONC:df
+                {: BlocDInstructions b = new BlocDInstructions(dfleft+1);
+                    b.ajouter(df);
+                    RESULT = b;
+                :}
                 |
                 LDECL:ld DECLVAR:dv
                 |
                 LDECL:ld DECLFONC:df
+                {:
+                    ((BlocDInstructions)ld).ajouter(df);
+                    RESULT = ld;
+                :}
                 ;
 
 DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
