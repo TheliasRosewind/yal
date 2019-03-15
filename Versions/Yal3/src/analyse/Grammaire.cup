@@ -75,7 +75,7 @@ terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, DECLFONC, LIR, RET, DECL, PARAM, LPARAM ;
+non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, DECLVAR, DECLFONC, LIR, RET, DECL;
 non terminal Expression EXP ;
 
 precedence left ET, OU;
@@ -136,14 +136,16 @@ DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT RET:r FIN
                 {:
                 int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
                 TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
-                RESULT = new Fonction(i, new BlocDInstructions(ileft+1), (Retourne)r, ileft + 1);
+                Fonction f=new Fonction(i,new BlocDInstructions(ileft+1),(Retourne)r,ileft + 1);
+                RESULT = f;
                 :}
                 |
                 FONCTION IDF:i POUV PFER DEBUT LINST:li RET:r FIN
                 {:
                 int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
                 TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
-                RESULT = new Fonction(i, li, (Retourne)r, ileft + 1);
+                Fonction f=new Fonction(i,li,(Retourne)r,ileft + 1);
+                RESULT = f;
                 :}
                 ;
 
