@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class Fonction extends ArbreAbstrait{
 
+	protected ArrayList<ArbreAbstrait> declarations;
+
 	protected ArbreAbstrait instruction;
 
 	protected String nom;
@@ -18,11 +20,19 @@ public class Fonction extends ArbreAbstrait{
 		super(n);
 		this.nom = nom;
 		this.instruction = a;
+		this.declarations = new ArrayList<>();
+	}
+
+	public void ajouterDeclaration(ArbreAbstrait a) {
+		this.declarations.add(a);
 	}
 
 	@Override
 	public void verifier() {
 		TDS.getInstance().entreeBloc();
+		for(ArbreAbstrait d : this.declarations){
+			d.verifier();
+		}
 		instruction.verifier();
 		if(TDS.getInstance().nombreRetours() == 0){
 			throw new FonctionSansRetourException(noLigne, "");

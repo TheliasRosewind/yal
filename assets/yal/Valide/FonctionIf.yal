@@ -1,9 +1,14 @@
 programme FonctionIf debut
 
     fonction f1() debut
-        si 4 < 10 alors
+        entier x;
+        lire x;
+        si x < 10 alors
             retourne 5;
+        sinon
+            retourne 50;
         finsi
+        ecrire 4;
     fin
 
     ecrire f1();

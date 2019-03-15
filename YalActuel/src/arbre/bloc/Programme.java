@@ -30,7 +30,7 @@ public class Programme extends ArbreAbstrait {
 	public Programme() {
 		super(1) ;
 		programme = new ArrayList<>() ;
-		declarations= new ArrayList<>();
+		declarations = new ArrayList<>();
 	}
 
 	public void ajouter(ArbreAbstrait a) {
