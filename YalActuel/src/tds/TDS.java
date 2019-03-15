@@ -6,6 +6,7 @@ import exceptions.DoubleDeclarationException;
 import exceptions.VariableNonDeclareeException;
 import tds.types.TypesCompteurs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -28,6 +29,8 @@ public class TDS {
 	 * Profondeur actuelle du bloc
 	 */
 	private int profondeurActuelle;
+
+	private HashMap<Integer, Integer> nbRetours;
 	/*
 	 * Instance de la table des symboles
 	 */
@@ -39,8 +42,9 @@ public class TDS {
 	private TDS(){
 		this.tds = new HashMap<>();
 		this.sommetDePile = 0;
-		this.profondeurActuelle=0;
+		this.profondeurActuelle = 0;
 		this.compteurs = new HashMap<>();
+		this.nbRetours = new HashMap<>();
 		compteurs.put(TypesCompteurs.CONDITIONNELLES, 0);
 		compteurs.put(TypesCompteurs.FONCTIONS, 0);
 		compteurs.put(TypesCompteurs.BLOCS, -1);
@@ -109,18 +113,31 @@ public class TDS {
 		return i;
 	}
 
+	public void addRetour(){
+		int nb = 0;
+		if (this.nbRetours.containsKey(profondeurActuelle)) {
+			nb = this.nbRetours.get(profondeurActuelle);
+		}
+		this.nbRetours.put(profondeurActuelle, nb + 1);
+	}
+
+	public int nombreRetours(){
+		return this.nbRetours.get(profondeurActuelle);
+	}
+
 	public int getCompteur(TypesCompteurs compteur){
 		return this.compteurs.get(compteur);
 	}
 
 	public void entreeBloc(){
-		sommetDePile-=12;
+		sommetDePile -= 12;
 		profondeurActuelle++;
+		this.nbRetours.put(profondeurActuelle, 0);
 		nextCompteur(TypesCompteurs.BLOCS);
 	}
 
 	public void sortieBloc(){
-		sommetDePile+=12;
+		sommetDePile += 12;
 		profondeurActuelle--;
 	}
 

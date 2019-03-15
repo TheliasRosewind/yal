@@ -16,6 +16,7 @@ for filename in `find assets/yal/ -name "*.yal" -type f`; do
     echo " "
     echo "$filename" | sed -e 's/^assets\/yal\///'
     java -cp out/production/YalActuel/:/opt/depot/projetToucan/java-cup-11a.jar:/opt/depot/projetToucan/jflex-1.6.1.jar Yal "$filename"
+    sleep 0.001
 done
 
 for filename in `find assets/yal/ -name "*.mips" -type f`; do

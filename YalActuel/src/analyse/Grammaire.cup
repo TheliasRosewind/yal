@@ -70,7 +70,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol PROGRAMME, DEBUT, FIN, FONCTION, POINTVIRGULE, RETOURNE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER ;
+terminal Symbol PROGRAMME, DEBUT, FIN, FONCTION, VIRGULE, POINTVIRGULE, RETOURNE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER ;
 terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
@@ -104,26 +104,19 @@ PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
 
 LDECL   ::=     DECL:d
                 {: BlocDInstructions b = new BlocDInstructions(dleft+1);
-                b.ajouter(d);
-                RESULT=b;
-                :}
+                   b.ajouter(d);
+                   RESULT = b; :}
                 |
                 LDECL:ld DECL:d
-                {:
-                    ((BlocDInstructions)ld).ajouter(d);
-                    RESULT = ld;
-                :}
+                {: ((BlocDInstructions)ld).ajouter(d);
+                   RESULT = ld; :}
                 ;
 
 DECL     ::=    DECLVAR:dv
-                {:
-                    RESULT = dv;
-                :}
+                {: RESULT = dv; :}
                 |
                 DECLFONC:df
-                {:
-                    RESULT = df;
-                :}
+                {: RESULT = df; :}
                 ;
 
 DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
@@ -132,19 +125,18 @@ DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 ;
 
-DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT RET:r FIN
-                {:
-                int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
-                TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
-                RESULT = new Fonction(i, new BlocDInstructions(ileft+1), (Retourne)r, ileft + 1);
-                :}
+DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
+                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
+                   RESULT = new Fonction(i, li, ileft + 1) ; :}
+                ;
+
+LPARAM  ::=     LPARAM VIRGULE PARAM
                 |
-                FONCTION IDF:i POUV PFER DEBUT LINST:li RET:r FIN
-                {:
-                int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS);
-                TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num));
-                RESULT = new Fonction(i, li, (Retourne)r, ileft + 1);
-                :}
+                PARAM
+                ;
+
+PARAM   ::=     TYPE:t IDF:i
                 ;
 
 LINST   ::=     LINST:li INST:i
@@ -166,7 +158,7 @@ INST    ::=     ECR:e POINTVIRGULE
                 LIR:l POINTVIRGULE
                 {: RESULT = l ; :}
                 |
-                RET:r
+                RET:r POINTVIRGULE
                 {: RESULT = r ; :}
                 |
                 SI EXP:e ALORS LINST:li FINSI
@@ -179,7 +171,7 @@ INST    ::=     ECR:e POINTVIRGULE
                 {: RESULT = new Tantque(e, li, eleft+1) ; :}
                 ;
 
-RET    ::=     RETOURNE EXP:e POINTVIRGULE
+RET    ::=      RETOURNE EXP:e
                 {: RESULT = new Retourne(e, eleft + 1); :}
                 ;
 

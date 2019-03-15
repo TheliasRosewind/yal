@@ -1,0 +1,12 @@
+programme FonctionIf debut
+
+    fonction f1() debut
+        si 4 < 10 alors
+            retourne 5;
+        finsi
+    fin
+
+    ecrire f1();
+    ecrire f1()*f1();
+
+fin
