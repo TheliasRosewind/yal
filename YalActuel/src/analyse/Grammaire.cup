@@ -140,18 +140,11 @@ DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
                    TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    RESULT = new Fonction(i, li, ileft + 1) ; :}
                 |
-                FONCTION IDF:i POUV PFER DEBUT LDECLVAR:ld LINST:li FIN
+                FONCTION IDF:i POUV LPARAM:lp PFER DEBUT LINST:li FIN
                 {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
                    TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    Fonction f = new Fonction(i, li, ileft + 1) ;
-                   f.ajouterDeclaration(ld); :}
-                |
-                FONCTION IDF:i POUV LPARAM:lp PFER DEBUT LDECLVAR:ld LINST:li FIN
-                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
-                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
-                   Fonction f = new Fonction(i, li, ileft + 1) ;
-                   f.ajouterParametre(lp);
-                   f.ajouterDeclaration(ld); :}
+                   f.ajouterParametre(lp); :}
                 ;
 
 LPARAM  ::=     LPARAM:lp POINTVIRGULE PARAM:p
@@ -159,7 +152,7 @@ LPARAM  ::=     LPARAM:lp POINTVIRGULE PARAM:p
                    RESULT = lp;:}
                 |
                 PARAM:p
-                {: BlocDInstructions b = new BlocDInstructions(dvleft+1);
+                {: BlocDInstructions b = new BlocDInstructions(pleft+1);
                    b.ajouter(p);
                    RESULT = p;:}
                 ;
@@ -265,4 +258,7 @@ EXP     ::=     EXP:g PLUS EXP:d
                 |
                 IDF:i POUV PFER
                 {: RESULT = new AppelFonction(i,ileft+1);:}
+                |
+                IDF:i POUV EXP:e PFER
+                {: RESULT = new AppelFonctionParam(i, e, ileft + 1);:}
                 ;

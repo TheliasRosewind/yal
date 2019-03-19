@@ -1,0 +1,12 @@
+programme FonctionP debut
+
+    entier a;
+
+    fonction f1 (entier p) debut
+        retourne p;
+    fin
+
+    a = f1(5);
+    ecrire a;
+
+fin
