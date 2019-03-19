@@ -1,0 +1,16 @@
+programme prog debut
+entier x;
+entier y;
+fonction f1() debut
+    entier x;
+    x=3;
+    ecrire y;
+    retourne x;
+fin
+
+x=5;
+y=8;
+ecrire f1();
+ecrire x;
+
+fin

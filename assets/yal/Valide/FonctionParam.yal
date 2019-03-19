@@ -1,0 +1,8 @@
+programme prog debut
+fonction f1(entier x) debut
+    retourne x*x;
+fin
+
+ecrire f1(6);
+
+fin

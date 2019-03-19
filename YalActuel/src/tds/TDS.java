@@ -14,9 +14,10 @@ import java.util.HashMap;
  */
 public class TDS {
 	/*
-	 * Association entre les entrées et leur symbole
-	 */
-	private HashMap<Entree, Symbole> tds;
+	 * Ensemble des TDS locales
+    */
+
+	private TDSLocale curr;
 	/*
 	 * Sauvegarde l'emplacement du sommet de pile
 	 */
@@ -40,7 +41,7 @@ public class TDS {
 	 * Constructeur de la table
 	 */
 	private TDS(){
-		this.tds = new HashMap<>();
+		this.curr=new TDSLocale(null);
 		this.sommetDePile = 0;
 		this.profondeurActuelle = 0;
 		this.compteurs = new HashMap<>();
@@ -65,10 +66,7 @@ public class TDS {
 	 * @throws DoubleDeclarationException si l'entrée existe déjà, une exception est levée
 	 */
 	public void ajouter(Entree entree, Symbole symbole) throws DoubleDeclarationException {
-		if (tds.containsKey(entree)){
-			throw new DoubleDeclarationException(entree.getNoLigne(),entree.getNom());
-		}
-		tds.put(entree, symbole);
+		curr.ajouter(entree,symbole);
 	}
 
 	/**
@@ -78,10 +76,7 @@ public class TDS {
 	 * @throws VariableNonDeclareeException si l'entrée spécifiée n'existe pas dans la table, une exception est levée
 	 */
 	public Symbole identifier(Entree entree) throws VariableNonDeclareeException {
-		if(!tds.containsKey(entree)){
-			throw new VariableNonDeclareeException(entree.getNoLigne(), entree.getNom());
-		}
-		return tds.get(entree);
+        return curr.identifier(entree);
 	}
 
 	/**
@@ -89,9 +84,7 @@ public class TDS {
 	 * @return l'emplacement de la variable dans la pile
 	 */
 	public int newDeplacement(){
-		int dep = sommetDePile;
-		sommetDePile -= 4;
-		return dep;
+		return curr.newDeplacement();
 	}
 
 	/**
@@ -134,11 +127,13 @@ public class TDS {
 		profondeurActuelle++;
 		this.nbRetours.put(profondeurActuelle, 0);
 		nextCompteur(TypesCompteurs.BLOCS);
+		curr=new TDSLocale(curr);
 	}
 
 	public void sortieBloc(){
 		sommetDePile += 12;
 		profondeurActuelle--;
+		curr=curr.getRoot();
 	}
 
 	public int getProfondeurActuelle() {
