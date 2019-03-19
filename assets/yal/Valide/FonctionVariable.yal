@@ -1,0 +1,10 @@
+programme essai debut
+fonction f1() debut
+    entier x;
+    lire x;
+    retourne x;
+fin
+
+ecrire f1();
+
+fin
