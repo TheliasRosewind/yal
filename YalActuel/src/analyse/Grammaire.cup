@@ -70,7 +70,7 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol PROGRAMME, DEBUT, FIN, FONCTION, VIRGULE, POINTVIRGULE, RETOURNE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER ;
+terminal Symbol PROGRAMME, DEBUT, FIN, FONCTION, POINTVIRGULE, RETOURNE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER ;
 terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
@@ -145,14 +145,29 @@ DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
                    TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    Fonction f = new Fonction(i, li, ileft + 1) ;
                    f.ajouterDeclaration(ld); :}
+                |
+                FONCTION IDF:i POUV LPARAM:lp PFER DEBUT LDECLVAR:ld LINST:li FIN
+                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
+                   Fonction f = new Fonction(i, li, ileft + 1) ;
+                   f.ajouterParametre(lp);
+                   f.ajouterDeclaration(ld); :}
                 ;
 
-LPARAM  ::=     LPARAM VIRGULE PARAM
+LPARAM  ::=     LPARAM:lp POINTVIRGULE PARAM:p
+                {: ((BlocDInstructions)lp).ajouter(p);
+                   RESULT = lp;:}
                 |
-                PARAM
+                PARAM:p
+                {: BlocDInstructions b = new BlocDInstructions(dvleft+1);
+                   b.ajouter(p);
+                   RESULT = p;:}
                 ;
 
 PARAM   ::=     TYPE:t IDF:i
+                {: int dep = TDS.getInstance().newDeplacement();
+                   TDS.getInstance().ajouter(new EntreeParametre(i, ileft + 1), new SymboleParametre(dep, t));
+                   RESULT = new Declaration(t, i, ileft + 1); :}
                 ;
 
 LINST   ::=     LINST:li INST:i
