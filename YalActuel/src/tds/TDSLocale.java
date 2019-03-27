@@ -12,6 +12,7 @@ import java.util.HashMap;
  * Table des symboles
  */
 public class TDSLocale {
+
 	private TDSLocale root;
 
 	/*
@@ -30,6 +31,7 @@ public class TDSLocale {
 	public TDSLocale(TDSLocale root){
 		this.tds = new HashMap<>();
 		this.sommetDePile = 0;
+		this.root = root;
 	}
 
 
@@ -54,11 +56,9 @@ public class TDSLocale {
 	 */
 	public Symbole identifier(Entree entree) throws VariableNonDeclareeException {
 		if(!tds.containsKey(entree)){
-			if(root!=null){
-				root.identifier(entree);
-			}
-			else
-			{
+			if(root != null){
+				return root.identifier(entree);
+			} else {
 				throw new VariableNonDeclareeException(entree.getNoLigne(), entree.getNom());
 			}
 		}

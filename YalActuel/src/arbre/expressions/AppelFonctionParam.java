@@ -1,21 +1,20 @@
 package arbre.expressions;
 
+import arbre.ArbreAbstrait;
 import tds.TDS;
 import tds.entrees.EntreeFonction;
-import tds.entrees.EntreeParametre;
-import tds.symboles.Symbole;
 import tds.types.Type;
 import tds.types.TypesVariable;
 
-public class AppelFonctionParam extends Expression{
+public class AppelFonctionParam extends Expression {
 
 	private String idf;
-	private Expression parametre;
+	private ArbreAbstrait parametres;
 
-	public AppelFonctionParam(String i, Expression param, int n) {
+	public AppelFonctionParam(String i, ArbreAbstrait param, int n) {
 		super(n);
 		this.idf = i;
-		this.parametre = param;
+		this.parametres = param;
 	}
 
 	@Override
@@ -25,7 +24,8 @@ public class AppelFonctionParam extends Expression{
 
 	@Override
 	public void verifier() {
-		Symbole s = TDS.getInstance().identifier(new EntreeParametre(idf,noLigne));
+		TDS.getInstance().identifier(new EntreeFonction(idf, noLigne));
+		this.parametres.verifier();
 	}
 
 	@Override

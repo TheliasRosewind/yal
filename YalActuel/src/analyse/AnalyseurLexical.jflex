@@ -49,6 +49,7 @@ espace = {finDeLigne}  | [ \t\f]
 
 "ecrire"               { return symbol(CodesLexicaux.ECRIRE); }
 
+","                    { return symbol(CodesLexicaux.VIRGULE); }
 ";"                    { return symbol(CodesLexicaux.POINTVIRGULE); }
 
 "="                    { return symbol(CodesLexicaux.EGAL); }
@@ -69,6 +70,8 @@ espace = {finDeLigne}  | [ \t\f]
 "non"                  { return symbol(CodesLexicaux.NON); }
 "("                    { return symbol(CodesLexicaux.POUV); }
 ")"                    { return symbol(CodesLexicaux.PFER); }
+"["                    { return symbol(CodesLexicaux.COUV); }
+"]"                    { return symbol(CodesLexicaux.CFER); }
 
 "tantque"              { return symbol(CodesLexicaux.TANTQUE); }
 "repeter"              { return symbol(CodesLexicaux.REPETER); }

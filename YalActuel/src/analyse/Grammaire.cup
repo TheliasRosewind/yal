@@ -70,12 +70,12 @@ parser code {:
    
 /* Terminals (tokens returned by the scanner).  */
 
-terminal Symbol PROGRAMME, DEBUT, FIN, FONCTION, POINTVIRGULE, RETOURNE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER ;
+terminal Symbol PROGRAMME, DEBUT, FIN, FONCTION, VIRGULE, POINTVIRGULE, RETOURNE, ECRIRE, EGAL, LIRE, PLUS, MOINS, MULT, DIV, EGALEGAL, DIFF, INF, SUPP, NON, ET, OU, SI, ALORS, SINON, FINSI, TANTQUE, REPETER, FINTANTQUE, POUV, PFER, COUV, CFER ;
 terminal String IDF, CSTENTIERE, TYPE ;
    
 /* Non terminals used in the grammar section.  */
 
-non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, LDECLVAR, DECLVAR, DECLFONC, LIR, RET, DECL, PARAM, LPARAM ;
+non terminal ArbreAbstrait PROG, LINST, INST, ECR, AFF, LDECL, LDECLVAR, DECLVAR, DECLFONC, LIR, RET, DECL, PARAM, LPARAM, PARAMEFF, LPARAMEFF ;
 non terminal Expression EXP ;
 
 precedence left ET, OU;
@@ -92,14 +92,14 @@ start with PROG ;
 
 PROG    ::=     PROGRAMME IDF DEBUT LDECL:ld LINST:li FIN
                 {: Programme p = new Programme();
-                p.ajouterDeclaration(ld);
-                p.ajouter(li);
-                RESULT = p ; :}
+                   p.ajouterDeclaration(ld);
+                   p.ajouter(li);
+                   RESULT = p ; :}
                 |
                 PROGRAMME IDF DEBUT LINST:li FIN
                 {: Programme p = new Programme();
-                p.ajouter(li);
-                RESULT = p; :}
+                   p.ajouter(li);
+                   RESULT = p; :}
                 ;
 
 LDECL   ::=     DECL:d
@@ -119,7 +119,7 @@ DECL     ::=    DECLVAR:dv
                 {: RESULT = df; :}
                 ;
 
-LDECLVAR  ::=    LDECLVAR:ld DECLVAR:dv
+LDECLVAR  ::=   LDECLVAR:ld DECLVAR:dv
                 {: ((BlocDInstructions)ld).ajouter(dv);
                    RESULT = ld; :}
                 |
@@ -135,18 +135,6 @@ DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 ;
 
-DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
-                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
-                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
-                   RESULT = new Fonction(i, li, ileft + 1) ; :}
-                |
-                FONCTION IDF:i POUV LPARAM:lp PFER DEBUT LINST:li FIN
-                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
-                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
-                   Fonction f = new Fonction(i, li, ileft + 1) ;
-                   f.ajouterParametre(lp); :}
-                ;
-
 LPARAM  ::=     LPARAM:lp POINTVIRGULE PARAM:p
                 {: ((BlocDInstructions)lp).ajouter(p);
                    RESULT = lp;:}
@@ -159,8 +147,36 @@ LPARAM  ::=     LPARAM:lp POINTVIRGULE PARAM:p
 
 PARAM   ::=     TYPE:t IDF:i
                 {: int dep = TDS.getInstance().newDeplacement();
-                   TDS.getInstance().ajouter(new EntreeParametre(i, ileft + 1), new SymboleParametre(dep, t));
+                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep, t));
                    RESULT = new Declaration(t, i, ileft + 1); :}
+                ;
+
+DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
+                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
+                   RESULT = new Fonction(i, li, ileft + 1) ; :}
+                |
+                FONCTION IDF:i POUV PFER DEBUT LDECLVAR:ld LINST:li FIN
+                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
+                   Fonction f = new Fonction(i, li, ileft + 1) ;
+                   f.ajouterDeclaration(ld);
+                   RESULT = f; :}
+                |
+                FONCTION IDF:i POUV LPARAM:lp PFER DEBUT LINST:li FIN
+                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
+                   Fonction f = new Fonction(i, li, ileft + 1) ;
+                   f.ajouterParametre(lp);
+                   RESULT = f; :}
+                |
+                FONCTION IDF:i POUV LPARAM:lp PFER DEBUT LDECLVAR:ld LINST:li FIN
+                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
+                   Fonction f = new Fonction(i, li, ileft + 1) ;
+                   f.ajouterDeclaration(ld);
+                   f.ajouterParametre(lp);
+                   RESULT = f; :}
                 ;
 
 LINST   ::=     LINST:li INST:i
@@ -211,6 +227,20 @@ LIR     ::=     LIRE IDF:i
                 {: RESULT = new Lire(i, ileft+1) ; :}
                 ;
 
+LPARAMEFF  ::=  LPARAMEFF:lp VIRGULE PARAMEFF:p
+                {: ((BlocDInstructions)lp).ajouter(p);
+                   RESULT = lp; :}
+                |
+                PARAMEFF:p
+                {: BlocDInstructions b = new BlocDInstructions(pleft+1);
+                   b.ajouter(p);
+                   RESULT = p; :}
+                ;
+
+PARAMEFF   ::=  EXP:e
+                {: RESULT = e; :}
+                ;
+
 EXP     ::=     EXP:g PLUS EXP:d
                 {: RESULT = new Addition(g, d, gleft+1) ; :}
                 |
@@ -257,8 +287,8 @@ EXP     ::=     EXP:g PLUS EXP:d
                 {: RESULT = e; :}
                 |
                 IDF:i POUV PFER
-                {: RESULT = new AppelFonction(i,ileft+1);:}
+                {: RESULT = new AppelFonction(i, ileft + 1); :}
                 |
-                IDF:i POUV EXP:e PFER
-                {: RESULT = new AppelFonctionParam(i, e, ileft + 1);:}
+                IDF:i POUV LPARAMEFF:lpe PFER
+                {: RESULT = new AppelFonctionParam(i, lpe, ileft + 1); :}
                 ;

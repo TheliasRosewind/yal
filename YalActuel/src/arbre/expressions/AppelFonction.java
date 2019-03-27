@@ -13,17 +13,17 @@ public class AppelFonction extends Expression {
 
 	public AppelFonction(String idf, int n) {
 		super(n);
-		this.idf=idf;
+		this.idf = idf;
 	}
 
 	@Override
 	public void verifier() {
-		Symbole s = TDS.getInstance().identifier(new EntreeFonction(idf,noLigne));
+		TDS.getInstance().identifier(new EntreeFonction(idf,noLigne));
 	}
 
 	@Override
 	public String toMIPS() {
-		StringBuilder sb=new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		sb.append("	#Appel de fonction\n" +
 				"	addi $sp, $sp, -4 #Réservation de la place pour la valeur de retour\n" +
 				"	jal FCT_" + ((SymboleFonction)TDS.getInstance().identifier(new EntreeFonction(idf,noLigne))).getNum() + "\n" +

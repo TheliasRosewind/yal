@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Fonction extends ArbreAbstrait{
 
-	protected ArrayList<ArbreAbstrait> declarations, parametre;
+	protected ArrayList<ArbreAbstrait> declarations, parametres;
 
 	protected ArbreAbstrait instruction;
 
@@ -21,11 +21,11 @@ public class Fonction extends ArbreAbstrait{
 		this.nom = nom;
 		this.instruction = a;
 		this.declarations = new ArrayList<>();
-		this.parametre = new ArrayList<>();
+		this.parametres = new ArrayList<>();
 	}
 
 	public void ajouterParametre(ArbreAbstrait a){
-		this.parametre.add(a);
+		this.parametres.add(a);
 	}
 
 	public void ajouterDeclaration(ArbreAbstrait a) {
@@ -35,7 +35,7 @@ public class Fonction extends ArbreAbstrait{
 	@Override
 	public void verifier() {
 		TDS.getInstance().entreeBloc();
-		for(ArbreAbstrait p : this.parametre){
+		for(ArbreAbstrait p : this.parametres){
 			p.verifier();
 		}
 		for(ArbreAbstrait d : this.declarations){
