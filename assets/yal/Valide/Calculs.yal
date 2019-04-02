@@ -4,6 +4,7 @@ programme Calculs debut
     entier x;
     entier y;
     entier z;
+    entier[5]w;
 
     //Instructions
 
@@ -34,5 +35,7 @@ programme Calculs debut
 
     // Tout
     ecrire 5 + 50 / 5 - 2 * 20;
+
+
 
 fin

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Programme extends ArbreAbstrait {
 
 	protected ArrayList<ArbreAbstrait> declarations;
+	protected ArrayList<ArbreAbstrait> fonctions;
 	protected ArrayList<ArbreAbstrait> programme ;
 
 	protected static String zoneData = ".data\n" +
@@ -42,6 +43,8 @@ public class Programme extends ArbreAbstrait {
 
 	public void ajouterDeclaration(ArbreAbstrait a) {declarations.add(a);}
 
+	public void ajouterFonction(ArbreAbstrait a) {declarations.add(a);}
+
 	@Override
 	public String toString() {
 		return programme.toString() ;
@@ -66,11 +69,14 @@ public class Programme extends ArbreAbstrait {
 		sb.append("     add $sp, $sp, ");
 		sb.append(TDS.getInstance().getSommetDePile());
 		sb.append("           # réserver la place pour les variables\n\n");
+		for(ArbreAbstrait e : declarations){
+			sb.append(e.toMIPS());
+		}
 		for (ArbreAbstrait a : programme) {
 			sb.append(a.toMIPS()) ;
 		}
 		sb.append(finCode) ;
-		for(ArbreAbstrait d : declarations){
+		for(ArbreAbstrait d : fonctions){
 			sb.append(d.toMIPS());
 		}
 		return sb.toString() ;
