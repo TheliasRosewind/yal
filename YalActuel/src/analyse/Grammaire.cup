@@ -133,6 +133,8 @@ DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                 {: int dep = TDS.getInstance().newDeplacement() ;
                    TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep,  t)) ;
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
+                |
+                TYPE:t COUV IDF:i CFER POINTVIRGULE
                 ;
 
 LPARAM  ::=     LPARAM:lp POINTVIRGULE PARAM:p
@@ -221,6 +223,8 @@ ECR     ::=     ECRIRE EXP:e
 
 AFF     ::=     IDF:i EGAL EXP:e
                 {: RESULT = new Affectation(i, e, ileft + 1) ; :}
+                |
+                IDF:i COUV EXP:e1 CFER EGAL EXP:e2
                 ;
 
 LIR     ::=     LIRE IDF:i
