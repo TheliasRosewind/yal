@@ -6,6 +6,7 @@ import tds.entrees.Entree;
 import tds.symboles.Symbole;
 import tds.types.TypesCompteurs;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,6 +15,7 @@ import java.util.HashMap;
 public class TDSLocale {
 
 	private TDSLocale root;
+	private ArrayList<TDSLocale> children;
 
 	/*
 	 * Association entre les entrées et leur symbole
@@ -30,6 +32,7 @@ public class TDSLocale {
 	 */
 	public TDSLocale(TDSLocale root){
 		this.tds = new HashMap<>();
+		this.children=new ArrayList<>();
 		this.sommetDePile = 0;
 		this.root = root;
 	}
@@ -75,15 +78,20 @@ public class TDSLocale {
 		return dep;
 	}
 
-	/**
-	 * Renvoie l'emplacement actuel du sommet de pile, afin de réserver l'espace nécessaire à la déclaration des variables
-	 * @return l'emplacement actuel du sommet de pile
-	 */
-	public int getSommetDePile() {
-		return sommetDePile;
-	}
 
 	public TDSLocale getRoot() {
 		return root;
+	}
+
+	public ArrayList<TDSLocale> getChildren() {
+		return children;
+	}
+
+	public TDSLocale getNextTDS() {
+		return children.iterator().next();
+	}
+
+	public void addChildren(TDSLocale tdsLocale){
+		this.children.add(tdsLocale);
 	}
 }

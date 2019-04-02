@@ -22,6 +22,9 @@ public class Programme extends ArbreAbstrait {
 											"\n" ;
 
 	protected static String debutCode = "main :\n" +
+										"	  li $v0, 0\n" +
+										"	  sw $v0, 0($sp)\n" +
+										"	  addi $sp, $sp, -4\n" +
 										"     move $s7,$sp                # initialiser $s7 avec $sp\n" ;
 	protected static String finCode =   "end :\n" +
 									    "     li $v0, 10                  # retour au système\n" +

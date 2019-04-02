@@ -12,7 +12,7 @@ public class EntreeVariable extends Entree {
 	 * @param nom nom de la variable
 	 * @param noLigne numéro de ligne de déclaration de la variable
 	 */
-	public EntreeVariable(String nom, int noLigne){
+	public EntreeVariable(String nom,int noLigne){
 		super(nom, noLigne);
 	}
 

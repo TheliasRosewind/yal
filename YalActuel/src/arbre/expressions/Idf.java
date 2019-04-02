@@ -22,7 +22,7 @@ public class Idf extends Expression {
 	@Override
 	public void verifier() {
 		SymboleVariable s = (SymboleVariable) TDS.getInstance().identifier(new EntreeVariable(nom, noLigne));
-		dep = s.getDeplacement();//+(TDS.getInstance().getProfondeurActuelle()-s.getImbrication())*12;
+		dep = s.getDeplacement();
 		type = s.getType();
 	}
 

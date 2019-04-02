@@ -124,17 +124,27 @@ public class TDS {
 	}
 
 	public void entreeBloc(){
-		sommetDePile -= 12;
 		profondeurActuelle++;
 		this.nbRetours.put(profondeurActuelle, 0);
 		nextCompteur(TypesCompteurs.BLOCS);
-		curr = new TDSLocale(curr);
+		TDSLocale next = new TDSLocale(curr);
+		curr.addChildren(next);
+		curr=next;
 	}
 
 	public void sortieBloc(){
-		sommetDePile += 12;
 		profondeurActuelle--;
 		curr = curr.getRoot();
+	}
+
+	public void entreeBlocVerif(){
+		profondeurActuelle++;
+		curr=curr.getNextTDS();
+	}
+
+	public void sortieBlocVerif(){
+		profondeurActuelle--;
+		curr=curr.getRoot();
 	}
 
 	public int getProfondeurActuelle() {

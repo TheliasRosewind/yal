@@ -10,15 +10,17 @@ public class SymboleVariable extends Symbole {
 
 	private int deplacement;
 	private Type type;
+	protected int depth;
 
 	/**
 	 * Constructeur du symbole
 	 * @param deplacement emplacement de la variable dans la pile
 	 * @param type type de la variable
 	 */
-	public SymboleVariable(int deplacement, String type){
+	public SymboleVariable(int deplacement, int depth, String type){
 		this.deplacement = deplacement;
 		this.type = new Type(TypesVariable.valueOf(type.toUpperCase()));
+		this.depth=depth;
 	}
 
 	@Override
@@ -31,4 +33,7 @@ public class SymboleVariable extends Symbole {
 		return type;
 	}
 
+	public int getDepth() {
+		return depth;
+	}
 }

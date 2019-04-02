@@ -120,18 +120,20 @@ DECL     ::=    DECLVAR:dv
                 ;
 
 LDECLVAR  ::=   LDECLVAR:ld DECLVAR:dv
-                {: ((BlocDInstructions)ld).ajouter(dv);
+                {: TDS.getInstance().entreeBloc();
+                  ((BlocDInstructions)ld).ajouter(dv);
                    RESULT = ld; :}
                 |
                 DECLVAR:dv
-                {: BlocDInstructions b = new BlocDInstructions(dvleft+1);
+                {: TDS.getInstance().entreeBloc();
+                   BlocDInstructions b = new BlocDInstructions(dvleft+1);
                    b.ajouter(dv);
                    RESULT = b; :}
                 ;
 
 DECLVAR  ::=    TYPE:t IDF:i POINTVIRGULE
                 {: int dep = TDS.getInstance().newDeplacement() ;
-                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep,  t)) ;
+                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep, TDS.getInstance().getProfondeurActuelle(), t)) ;
                    RESULT = new Declaration(t, i, ileft + 1) ; :}
                 |
                 TYPE:t COUV IDF:i CFER POINTVIRGULE
@@ -149,35 +151,41 @@ LPARAM  ::=     LPARAM:lp POINTVIRGULE PARAM:p
 
 PARAM   ::=     TYPE:t IDF:i
                 {: int dep = TDS.getInstance().newDeplacement();
-                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep, t));
+                   TDS.getInstance().ajouter(new EntreeVariable(i, ileft + 1), new SymboleVariable(dep,TDS.getInstance().getProfondeurActuelle(), t));
                    RESULT = new Declaration(t, i, ileft + 1); :}
                 ;
 
 DECLFONC ::=    FONCTION IDF:i POUV PFER DEBUT LINST:li FIN
-                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
+                {: TDS.getInstance().entreeBloc();
+                    int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
+                   TDS.getInstance().sortieBloc();
                    TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    RESULT = new Fonction(i, li, ileft + 1) ; :}
                 |
                 FONCTION IDF:i POUV PFER DEBUT LDECLVAR:ld LINST:li FIN
                 {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
-                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    Fonction f = new Fonction(i, li, ileft + 1) ;
+                   TDS.getInstance().sortieBloc();
                    f.ajouterDeclaration(ld);
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    RESULT = f; :}
                 |
                 FONCTION IDF:i POUV LPARAM:lp PFER DEBUT LINST:li FIN
-                {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
-                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
+                {: TDS.getInstance().entreeBloc();
+                int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
                    Fonction f = new Fonction(i, li, ileft + 1) ;
+                   TDS.getInstance().sortieBloc();
                    f.ajouterParametre(lp);
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    RESULT = f; :}
                 |
                 FONCTION IDF:i POUV LPARAM:lp PFER DEBUT LDECLVAR:ld LINST:li FIN
                 {: int num = TDS.getInstance().nextCompteur(TypesCompteurs.FONCTIONS) ;
-                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    Fonction f = new Fonction(i, li, ileft + 1) ;
+                   TDS.getInstance().sortieBloc();
                    f.ajouterDeclaration(ld);
                    f.ajouterParametre(lp);
+                   TDS.getInstance().ajouter(new EntreeFonction(i,ileft+1), new SymboleFonction(num)) ;
                    RESULT = f; :}
                 ;
 

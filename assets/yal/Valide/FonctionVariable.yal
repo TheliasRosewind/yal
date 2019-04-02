@@ -1,5 +1,5 @@
 programme essai debut
-
+entier y;
     fonction f1() debut
         entier x;
         x = 5;

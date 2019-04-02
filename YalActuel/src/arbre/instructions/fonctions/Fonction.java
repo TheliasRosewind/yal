@@ -34,7 +34,7 @@ public class Fonction extends ArbreAbstrait{
 
 	@Override
 	public void verifier() {
-		TDS.getInstance().entreeBloc();
+		TDS.getInstance().entreeBlocVerif();
 		for(ArbreAbstrait p : this.parametres){
 			p.verifier();
 		}
@@ -45,7 +45,7 @@ public class Fonction extends ArbreAbstrait{
 		if(TDS.getInstance().nombreRetours() == 0){
 			throw new FonctionSansRetourException(noLigne, "");
 		}
-		TDS.getInstance().sortieBloc();
+		TDS.getInstance().sortieBlocVerif();
 	}
 
 	@Override
@@ -54,22 +54,22 @@ public class Fonction extends ArbreAbstrait{
 		return  "FCT_" + sf.getNum() + ":\n" +
 				"	sw $ra, 0($sp) #Empilage de l'adresse de retour\n" +
 				"	addi $sp, $sp, -4\n" +
-				//"	sw $s7, 0($sp) #Empilage de la base locale précédente\n" +
-				//"	addi $sp, $sp, -4\n" +
-				//"	move $s7, $sp #Mise en place de la nouvelle base locale\n" +
+				"	sw $s7, 0($sp) #Empilage de la base locale précédente\n" +
+				"	addi $sp, $sp, -4\n" +
+				"	li $v0, " + sf.getNum() + "#Récupération du numéro de bloc\n" +
+				"	sw $v0, 0($sp) #Empilage du numéro de bloc\n" +
+				"	addi $sp, $sp, -4\n" +
+				"	move $s7, $sp #Mise en place de la nouvelle base locale\n" +
+				"	addi $sp, $sp, " + -declarations.size()*4 + "#Réservation de l'espace pour les variables\n" +
 				"	#Corps de la fonction\n" +
-				//"	sw $s7, 0($sp) #Empilage de la base locale précédente\n" +
-				//"	addi $sp, $sp, -4\n" +
-				//"	move $s7, $sp #Mise en place de la nouvelle base locale\n" +
 				instruction.toMIPS() +
 				"		#Fin de la fonction\n" +
 				"	FIN_FCT_" + sf.getNum() + ":\n" +
-				"	addi $sp, $sp, 4 #Remise en place du sommet de pile\n" +
-				//"	lw $s7, -4($sp) #Récupération de la base locale précédente\n" +
+				"	addi $sp, $sp, "+ (12 + (declarations.size() * 4)) +"#Remise en place du sommet de pile\n" +
+				"	lw $s7, -4($sp) #Récupération de la base locale précédente\n" +
 				"	sw $v0, 4($sp) #Stockage de la valeur de retour\n" +
 				"	lw $v0, 0($sp) #Récupération de l'adresse de retour\n" +
 				"	jr $v0 #Retour\n"
-				//"	lw $s7, -4($sp) #Récupération de la base locale précédente\n" +
 				;
 	}
 
